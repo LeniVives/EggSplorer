@@ -4,9 +4,11 @@ Home:
 1: login
 2: registratie
 3: Producten
+	(
 	a: Details
-	(b): sort
-	(c): search
+	b: sort
+	c: search
+	)
 4: Info
 5: admindashboard
 	a: bestellingen overview
