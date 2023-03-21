@@ -8,9 +8,9 @@
 
         public DateTime? OrderFulfilled { get; set; }
 
-        public int CustomerID { get; set; }
+        public int UserID { get; set; }
 
-        public Customers Customer { get; set; } = null!;
+        public Users User { get; set; } = null!;
 
         public ICollection<OrderDetails> OrderDetail { get; set; } = null!;
     }

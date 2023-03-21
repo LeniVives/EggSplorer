@@ -2,9 +2,9 @@
 
 namespace EggSplorer.Models
 {
-    public class Customers
+    public class Users
     {
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         [Required(ErrorMessage = "Please enter your first name")]
         public string? FirstName { get; set; }
@@ -18,6 +18,13 @@ namespace EggSplorer.Models
         [EmailAddress]
         [Required(ErrorMessage = "Please enter your email")]
         public string? Email { get; set; }
+
+        [Required(ErrorMessage = "Please enter your password")]
+        public string Password { get; set; }
+
+        public bool IsAdmin { get; set; }
+
+        public bool IsApproved { get; set; }
 
         public ICollection<Orders> Order { get; set; } = null!;
     }

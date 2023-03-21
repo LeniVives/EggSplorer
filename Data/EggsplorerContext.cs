@@ -5,7 +5,7 @@ namespace EggSplorer.Data
 {
     public class EggsplorerContext : DbContext
     {
-        public DbSet<Customers> Customers { get; set; } = null!;
+        public DbSet<Users> Users { get; set; } = null!;
 
         public DbSet<Products> Products { get; set; } = null!;
 
