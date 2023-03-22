@@ -18,7 +18,19 @@ namespace EggSplorer.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Producten()
+        {
+            return View();
+        }
+        public IActionResult Info()
+        {
+            return View();
+        }
+        public IActionResult Login()
+        {
+            return View();
+        }
+        public IActionResult Registratie()
         {
             return View();
         }
