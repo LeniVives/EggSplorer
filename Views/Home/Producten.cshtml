@@ -13,18 +13,19 @@
     <table class="table">
         <thead>
             <tr>
+                <th class="col-lg-3 text-center">
+                    Image
+                </th>
                 <th class="col-lg-2">
                     @Html.DisplayNameFor(model => model.Products.First().Name)
                 </th>
-                <th class="col-lg-4">
+                <th class="col-lg-5">
                     @Html.DisplayNameFor(model => model.Products.First().Description)
                 </th>
-                <th class="col-lg-2">
+                <th class="col-lg-1">
                     @Html.DisplayNameFor(model => model.Products.First().ProductPrice)
                 </th>
-                <th class="col-lg-4 text-center">
-                    Image
-                </th>
+
             </tr>
         </thead>
 
@@ -32,21 +33,20 @@
             @foreach (var item in Model.Products)
             {
                 <tr>
+                    <td class="col-lg-3 text-center">
+                        @{var img = item.Id.ToString() + ".jpg";}
+                        <img class="img-fluid" src="~/images/@img" style="height:100px; object-fit:cover">
+                    </td>                    
                     <td class="col-lg-2">
                         @item.Name
                     </td>
-                    <td class="col-lg-4">
+                    <td class="col-lg-5">
                         @item.Description
                     </td>
-                    <td class="col-lg-2">
+                    <td class="col-lg-1">
                         € @item.ProductPrice
                     </td>
-                    <td class="col-lg-4 text-center">
-                        @{var img = item.Id.ToString() + ".jpg";}
-                        <img class="img-fluid" src="~/images/@img" style="height:100px; object-fit:cover">
-                    </td>
                 </tr>
-
             }
         </tbody>
     </table>
