@@ -1,6 +1,7 @@
 ﻿using EggSplorer.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using EggSplorer.Data;
 
 namespace EggSplorer.Controllers
 {
@@ -20,7 +21,9 @@ namespace EggSplorer.Controllers
 
         public IActionResult Producten()
         {
-            return View();
+            EggSplorer.Data.EggsplorerContext _content = new EggSplorer.Data.EggsplorerContext();
+
+            return View("Producten", _content);
         }
         public IActionResult Info()
         {
