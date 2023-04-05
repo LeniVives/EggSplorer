@@ -4,8 +4,10 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<EggsplorerContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("EggsplorerContext")));
+using EggsplorerContext context = new EggsplorerContext();
+
+//builder.Services.AddDbContext<EggsplorerContext>(options =>
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("EggsplorerContext")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
