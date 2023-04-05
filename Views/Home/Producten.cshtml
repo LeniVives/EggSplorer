@@ -22,11 +22,12 @@
                 <th class="col-lg-2">
                     @Html.DisplayNameFor(model => model.Products.First().ProductPrice)
                 </th>
-                <th class="col-lg-4">
+                <th class="col-lg-4 text-center">
                     Image
                 </th>
             </tr>
         </thead>
+
         <tbody>
             @foreach (var item in Model.Products)
             {
@@ -40,7 +41,7 @@
                     <td class="col-lg-2">
                         € @item.ProductPrice
                     </td>
-                    <td class="col-lg-4">
+                    <td class="col-lg-4 text-center">
                         @{var img = item.Id.ToString() + ".jpg";}
                         <img class="img-fluid" src="~/images/@img" style="height:100px; object-fit:cover">
                     </td>
