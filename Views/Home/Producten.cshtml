@@ -9,13 +9,39 @@
     <link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
-    <p>
-        test
-    </p>
-    @foreach (var item in Model.Products)
-    {
-        @item.Name
-        <br>
-    }
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Product Price
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Products)
+            {
+                <tr>
+                    <td>
+                        @item.Id
+                    </td>
+                    <td>
+                        @item.Name
+                    </td>
+                
+                    <td>
+                        € @item.ProductPrice
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+    
 </body>
 </html>
