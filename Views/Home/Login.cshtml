@@ -1,5 +1,42 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model EggSplorer.Models.Users
 @{
+	ViewBag.Title = "Login";
 }
+
+
+
+<div class="text-center">
+	<h1 class="display-4">Login</h1>
+</div>
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+<div class="form-group">
+	@Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+	<div class="col-md-10">
+		@Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+		@Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+		@Html.ValidationMessage("ErrorEmail", new { @class = "text-danger" })
+	</div>
+</div>
+
+<div class="form-group">
+	@Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+	<div class="col-md-10">
+		@Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+		@Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+		<script>
+			var password = document.getElementById("Password");
+			password.type = "password";
+		</script>
+	</div>
+	<div class="form-group">
+		<div class="col-md-offset-2 col-md-10">
+			<input type="submit" value="Inloggen" class="btn btn-default" />
+		</div>
+	</div>
+	<div>
+		@Html.ActionLink("Registreren", "Registratie")
+	</div>
+</div>
+
+
