@@ -20,27 +20,6 @@ namespace EggSplorer.Controllers
             return View();
         }
 
-        //public IActionResult Producten()
-        //{
-        //    var context = new EggsplorerContext();
-        //    var products = context.Products.OrderBy(p => p.Name).ToList();
-        //    return View(products);
-        //}
-        //[HttpPost]
-        //public IActionResult Producten(string sorting)
-        //{
-        //    var context = new EggsplorerContext();
-
-        //    if (sorting == "sortname")
-        //    {
-        //        var productsdec = context.Products.OrderByDescending(p => p.Name).ToList();
-        //        return View(productsdec);
-        //    }
-
-        //    var products = context.Products.OrderBy(p => p.Name).ToList();
-        //    return View(products);
-        //}
-
         public async Task<IActionResult> Producten(string sortOrder)
         {
             var _context = new EggsplorerContext();
