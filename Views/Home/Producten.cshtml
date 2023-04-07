@@ -17,10 +17,7 @@
                     Image
                 </th>
                 <th class="col-lg-2">
-                    <form method="post" action="#">
-                        <input type="hidden" name="sorting" value="sortname">
-                        <input type="submit" class="border-0" value="@Html.DisplayNameFor(model => model.First().Name)">
-                    </form>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.First().Name)</a>
                 </th>
                 <th class="col-lg-5">
                     @Html.DisplayNameFor(model => model.First().Description)

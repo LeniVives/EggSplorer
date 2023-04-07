@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using EggSplorer.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace EggSplorer.Controllers
 {
@@ -19,26 +20,46 @@ namespace EggSplorer.Controllers
             return View();
         }
 
-        public IActionResult Producten()
-        {
-            using var context = new EggsplorerContext();
-            var products = context.Products.OrderBy(p => p.Name).ToList();
-            return View(products);
-        }
-        [HttpPost]
-        public IActionResult Producten(string sorting)
-        {
-            using var context = new EggsplorerContext();
+        //public IActionResult Producten()
+        //{
+        //    var context = new EggsplorerContext();
+        //    var products = context.Products.OrderBy(p => p.Name).ToList();
+        //    return View(products);
+        //}
+        //[HttpPost]
+        //public IActionResult Producten(string sorting)
+        //{
+        //    var context = new EggsplorerContext();
 
-            if (sorting == "sortname")
+        //    if (sorting == "sortname")
+        //    {
+        //        var productsdec = context.Products.OrderByDescending(p => p.Name).ToList();
+        //        return View(productsdec);
+        //    }
+
+        //    var products = context.Products.OrderBy(p => p.Name).ToList();
+        //    return View(products);
+        //}
+
+        public async Task<IActionResult> Producten(string sortOrder)
+        {
+            var _context = new EggsplorerContext();
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            //ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            var products = from s in _context.Products
+                           select s;
+            switch (sortOrder)
             {
-                var productsdec = context.Products.OrderByDescending(p => p.Name).ToList();
-                return View(productsdec);
+                case "name_desc":
+                    products = products.OrderByDescending(s => s.Name);
+                    break;
+                default:
+                    products = products.OrderBy(s => s.Name);
+                    break;
             }
-
-            var products = context.Products.OrderBy(p => p.Name).ToList();
-            return View(products);
+            return View(await products.AsNoTracking().ToListAsync());
         }
+
         public IActionResult Info()
         {
             return View();
