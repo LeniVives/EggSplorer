@@ -9,10 +9,12 @@ namespace EggSplorer.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly EggsplorerContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,EggsplorerContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -22,7 +24,6 @@ namespace EggSplorer.Controllers
 
         public async Task<IActionResult> Producten(string sortOrder)
         {
-            var _context = new EggsplorerContext();
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
             var products = from s in _context.Products

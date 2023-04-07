@@ -19,3 +19,22 @@ body {
 .table--bottom-margin {
   margin-bottom: 50px; /* adjust as needed */
 }
+
+.my-form-group {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.my-form-group input {
+    display: inline-block;
+    width: 90px;
+    height: 30px;
+    vertical-align: middle;
+}
+
+.my-form-group button {
+    display: inline-block;
+    height: 40px;
+}
+
+

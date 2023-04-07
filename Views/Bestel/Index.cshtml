@@ -1,4 +1,5 @@
-﻿@model List<EggSplorer.Models.Products>
+﻿@model OrderViewModel
+@*@model List<EggSplorer.Models.Products>*@
 @{
     ViewData["Title"] = "Index";
 }
@@ -15,27 +16,29 @@
     <table class="table table--bottom-margin">
         <thead>
             <tr>
-                <th class="col-lg-3 text-center">
+                <th class="col-lg-2 text-center">
                     Foto
                 </th>
                 <th class="col-lg-2">
                     Naam
                 </th>
-                <th class="col-lg-5">
+                <th class="col-lg-4">
                     Beschrijving
                 </th>
                 <th class="col-lg-1">
                     Prijs
                 </th>
-                
+                <th class="col-lg-1">
+                    Aantal
+                </th>
             </tr>
         </thead>
 
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var item in Model.Products)
             {
                 <tr>
-                    <td class="col-lg-3 text-center">
+                    <td class="col-lg-2 text-center">
                         @{
                             var img = item.Id.ToString() + ".jpg";
                         }
@@ -44,11 +47,23 @@
                     <td class="col-lg-2">
                         @item.Name
                     </td>
-                    <td class="col-lg-5">
+                    <td class="col-lg-4">
                         @item.Description
                     </td>
                     <td class="col-lg-1">
                         € @item.ProductPrice
+                    </td>
+                    <td class="col-lg-2">
+                        <form method="post">
+                            <div class="my-form-group form-group">
+                                <input type="number" name="quantity" id="quantity">
+                            </div>
+                            <div class="my-form-group form-group">
+                                <button type="submit" class="submit-button">
+                                    <span class="material-icons">shopping_cart</span>
+                                </button>
+                            </div>
+                        </form>
                     </td>
                 </tr>
             }
