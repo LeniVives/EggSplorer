@@ -2,7 +2,6 @@
 @{
     ViewData["Title"] = "Producten";
 }
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,15 +18,18 @@
                     Image
                 </th>
                 <th class="col-lg-2">
-                    <a asp-action="Producten" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.First().Name)</a>
+                    <a asp-action="Producten" asp-route-sortOrder="@ViewData["NameSortParm"]">
+                        @Html.DisplayNameFor(model => model.First().Name)
+                    </a>
                 </th>
                 <th class="col-lg-5">
                     @Html.DisplayNameFor(model => model.First().Description)
                 </th>
                 <th class="col-lg-1">
-                    @Html.DisplayNameFor(model => model.First().ProductPrice)
+                    <a asp-action="Producten" asp-route-sortOrder="@ViewData["PriceSortParm"]">
+                        @Html.DisplayNameFor(model => model.First().ProductPrice)
+                    </a>
                 </th>
-
             </tr>
         </thead>
 
@@ -52,6 +54,5 @@
             }
         </tbody>
     </table>
-    
 </body>
 </html>
