@@ -1,13 +1,11 @@
-﻿@model List<EggSplorer.Models.Products>
-@{
-    Layout = null;
-}
+﻿@model EggSplorer.Data.EggsplorerContext
+@{Layout = null;}
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Producten</title>
+    <title>RsvpForm</title>
     <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="/css/styles.css" />
 </head>
@@ -19,28 +17,26 @@
                     Image
                 </th>
                 <th class="col-lg-2">
-                    @Html.DisplayNameFor(model => model.First().Name)
+                    @Html.DisplayNameFor(model => model.Products.First().Name)
                 </th>
                 <th class="col-lg-5">
-                    @Html.DisplayNameFor(model => model.First().Description)
+                    @Html.DisplayNameFor(model => model.Products.First().Description)
                 </th>
                 <th class="col-lg-1">
-                    @Html.DisplayNameFor(model => model.First().ProductPrice)
+                    @Html.DisplayNameFor(model => model.Products.First().ProductPrice)
                 </th>
 
             </tr>
         </thead>
 
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var item in Model.Products)
             {
                 <tr>
                     <td class="col-lg-3 text-center">
-                        @{
-                            var img = item.Id.ToString() + ".jpg";
-                        }
+                        @{var img = item.Id.ToString() + ".jpg";}
                         <img class="img-fluid" src="~/images/@img" style="height:100px; object-fit:cover">
-                    </td>
+                    </td>                    
                     <td class="col-lg-2">
                         @item.Name
                     </td>
@@ -54,6 +50,6 @@
             }
         </tbody>
     </table>
-
+    
 </body>
 </html>

@@ -21,13 +21,10 @@ namespace EggSplorer.Controllers
 
         public IActionResult Producten()
         {
-            using var context = new EggsplorerContext();
+            EggSplorer.Data.EggsplorerContext _content = new EggSplorer.Data.EggsplorerContext();
 
-            var products = context.Products.OrderBy(p => p.Name).ToList();
-
-            return View(products);
+            return View("Producten", _content);
         }
-
         public IActionResult Info()
         {
             return View();
