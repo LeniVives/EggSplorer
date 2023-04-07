@@ -16,3 +16,6 @@ html {
 body {
   margin-bottom: 60px;
 }
+.table--bottom-margin {
+  margin-bottom: 50px; /* adjust as needed */
+}
