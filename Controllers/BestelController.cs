@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EggSplorer.Data;
+using EggSplorer.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 
 namespace EggSplorer.Controllers
 {
@@ -11,7 +14,11 @@ namespace EggSplorer.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var _context = new EggsplorerContext();
+            var products = from s in _context.Products
+                           select s;
+            products = products.OrderBy(s => s.Name);
+            return View(products);
         }
     }
 }

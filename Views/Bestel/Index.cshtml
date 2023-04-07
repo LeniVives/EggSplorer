@@ -1,5 +1,57 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<EggSplorer.Models.Products>
 @{
+    ViewData["Title"] = "Bestellen";
 }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>RsvpForm</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/site.css" />
+</head>
+<body>
+    <table class="table table--bottom-margin">
+        <thead>
+            <tr>
+                <th class="col-lg-3 text-center">
+                    Foto
+                </th>
+                <th class="col-lg-2">
+                    Naam
+                </th>
+                <th class="col-lg-5">
+                    Beschrijving
+                </th>
+                <th class="col-lg-1">
+                    Prijs
+                </th>
+                
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="col-lg-3 text-center">
+                        @{
+                            var img = item.Id.ToString() + ".jpg";
+                        }
+                        <img class="img-fluid" src="~/images/@img" style="height:100px; object-fit:cover">
+                    </td>
+                    <td class="col-lg-2">
+                        @item.Name
+                    </td>
+                    <td class="col-lg-5">
+                        @item.Description
+                    </td>
+                    <td class="col-lg-1">
+                        € @item.ProductPrice
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
