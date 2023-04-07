@@ -21,7 +21,7 @@ namespace EggSplorer.Controllers
 
         public IActionResult Producten()
         {
-            EggSplorer.Data.EggsplorerContext _content = new EggSplorer.Data.EggsplorerContext();
+            EggsplorerContext _content = new EggsplorerContext();
 
             return View("Producten", _content);
         }

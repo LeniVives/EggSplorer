@@ -1,13 +1,13 @@
 using EggSplorer.Data;
 using EggSplorer.Models;
 using Microsoft.EntityFrameworkCore;
+//using EggsplorerContext context = new EggsplorerContext();
 
 var builder = WebApplication.CreateBuilder(args);
 
-using EggsplorerContext context = new EggsplorerContext();
+builder.Services.AddDbContext<EggsplorerContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("EggsplorerContext")));
 
-//builder.Services.AddDbContext<EggsplorerContext>(options =>
-//    options.UseSqlServer(builder.Configuration.GetConnectionString("EggsplorerContext")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
