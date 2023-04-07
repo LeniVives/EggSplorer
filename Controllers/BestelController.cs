@@ -13,29 +13,13 @@ namespace EggSplorer.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Index(string sortOrder)
+        public IActionResult Index()
         {
             var _context = new EggsplorerContext();
-            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
             var products = from s in _context.Products
                            select s;
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    products = products.OrderByDescending(s => s.Name);
-                    break;
-                case "Price":
-                    products = products.OrderBy(s => s.ProductPrice);
-                    break;
-                case "price_desc":
-                    products = products.OrderByDescending(s => s.ProductPrice);
-                    break;
-                default:
-                    products = products.OrderBy(s => s.Name);
-                    break;
-            }
-            return View(await products.AsNoTracking().ToListAsync());
+            products = products.OrderBy(s => s.Name);
+            return View(products.ToList());
         }
     }
 }
