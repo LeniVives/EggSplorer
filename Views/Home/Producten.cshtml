@@ -1,4 +1,4 @@
-﻿@model EggSplorer.Data.EggsplorerContext
+﻿@model List<EggSplorer.Models.Products>
 @{Layout = null;}
 
 <!DOCTYPE html>
@@ -17,20 +17,23 @@
                     Image
                 </th>
                 <th class="col-lg-2">
-                    @Html.DisplayNameFor(model => model.Products.First().Name)
+                    <form method="post" action="#">
+                        <input type="hidden" name="sorting" value="sortname">
+                        <input type="submit" class="border-0" value="@Html.DisplayNameFor(model => model.First().Name)">
+                    </form>
                 </th>
                 <th class="col-lg-5">
-                    @Html.DisplayNameFor(model => model.Products.First().Description)
+                    @Html.DisplayNameFor(model => model.First().Description)
                 </th>
                 <th class="col-lg-1">
-                    @Html.DisplayNameFor(model => model.Products.First().ProductPrice)
+                    @Html.DisplayNameFor(model => model.First().ProductPrice)
                 </th>
 
             </tr>
         </thead>
 
         <tbody>
-            @foreach (var item in Model.Products)
+            @foreach (var item in Model)
             {
                 <tr>
                     <td class="col-lg-3 text-center">
