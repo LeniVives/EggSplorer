@@ -18,38 +18,44 @@ namespace EggSplorer.Controllers
         //index with orderviewmodel
         public IActionResult Index()
         {
+            System.Diagnostics.Debug.WriteLine("Index");
             var orderViewModel = new OrderViewModel
             {
-                OrderDetails = new OrderDetails(),
+                OrderDetails = new OrderDetails(
+                    quantity: 0,
+                    orderId: 0,
+                    order: null!,
+                    productId: 0,
+                    product: null!
+
+                    
+                    ),
                 Products = _context.Products.ToList()
             };
             return View(orderViewModel);
         }
 
-        //[HttpPost]
-        //public ActionResult AddOrderDetail(OrderViewModel model, int amount)
-        //{
-        //    var product = _context.Products.Find(model.OrderDetails.ProductId);
-        //    var order = _context.Orders.Find(model.OrderDetails.OrderId);
-
-        //    var orderDetail = new OrderDetails
-        //    {
-        //        Product = product,
-        //        Order = order,
-        //        Quantity = amount
-        //    };
-
-        //    _context.OrderDetails.Add(orderDetail);
-        //    _context.SaveChanges();
-
-        //    var refererUrl = Request.Headers["Referer"].ToString();
-        //    return Redirect(refererUrl);
-        //}
-
-
-        public IActionResult Winkelmandje()
+        [HttpPost]
+        public IActionResult Index(OrderViewModel orderViewModel)
         {
-            return View();
+            System.Diagnostics.Debug.WriteLine("HttpPost");
+            System.Diagnostics.Debug.WriteLine(ModelState);
+
+            if (ModelState.IsValid)
+            {
+                System.Diagnostics.Debug.WriteLine("ModelState.IsValid");
+                var order = new Orders();
+                _context.Orders.Add(order);
+                _context.SaveChanges();
+
+                orderViewModel.OrderDetails.OrderId = order.Id;
+                _context.OrderDetails.Add(orderViewModel.OrderDetails);
+                _context.SaveChanges();
+
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(orderViewModel);
         }
     }
 }
