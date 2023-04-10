@@ -1,4 +1,4 @@
-﻿@model OrderViewModel
+﻿@model dynamic
 @*@model List<EggSplorer.Models.Products>*@
 @{
     ViewData["Title"] = "Index";
@@ -13,57 +13,83 @@
     <link rel="stylesheet" href="/css/site.css" />
 </head>
 <body>
+    <form method="post">
+        <table class="table table--bottom-margin">
+            <thead>
+                <tr>
+                    <th class="col-lg-2 text-center">
+                        Foto
+                    </th>
+                    <th class="col-lg-2">
+                        Naam
+                    </th>
+                    <th class="col-lg-4">
+                        Beschrijving
+                    </th>
+                    <th class="col-lg-1">
+                        Prijs
+                    </th>
+                    <th class="col-lg-1">
+                        Aantal
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @for (var i = 0; i < Model.Products.Count; i++)
+                {
+                    <tr>
+                        <td class="col-lg-2 text-center">
+                            @{
+                                var img = Model.Products[i].Id.ToString() + ".jpg";
+                            }
+                            <img class="img-fluid" src="~/images/@img" style="height:100px; object-fit:cover">
+                        </td>
+                        <td class="col-lg-2">
+                            @Model.Products[i].Name
+                        </td>
+                        <td class="col-lg-4">
+                            @Model.Products[i].Description
+                        </td>
+                        <td class="col-lg-1">
+                            € @Model.Products[i].ProductPrice
+                        </td>
+                        <td class="col-lg-2">
+                            <div class="my-form-group form-group">
+                                <input type="hidden" name="MiniOrderDetail[@i].ProductId" value="@Model.Products[i].Id">
+                                <input type="number" name="MiniOrderDetail[@i].Quantity">
+                            </div>
+                        </td>
+                    </tr>
+                }                
+            </tbody>
+        </table>
+        <div class="my-form-group form-group">
+            <button type="submit" class="submit-button">
+                <span class="material-icons">shopping_cart</span>
+            </button>
+        </div>
+    </form>
     <table class="table table--bottom-margin">
         <thead>
             <tr>
-                <th class="col-lg-2 text-center">
+                <th class="col-lg-1 text-center">
+                    Id
+                </th>
+                <th class="col-lg-1 text-center">
                     Foto
-                </th>
-                <th class="col-lg-2">
-                    Naam
-                </th>
-                <th class="col-lg-4">
-                    Beschrijving
-                </th>
-                <th class="col-lg-1">
-                    Prijs
-                </th>
-                <th class="col-lg-1">
-                    Aantal
                 </th>
             </tr>
         </thead>
-
         <tbody>
-            @foreach (var item in Model.Products)
+            @foreach (var item in Model.MiniOrderDetail)
             {
                 <tr>
-                    <td class="col-lg-2 text-center">
-                        @{
-                            var img = item.Id.ToString() + ".jpg";
-                        }
-                        <img class="img-fluid" src="~/images/@img" style="height:100px; object-fit:cover">
-                    </td>
-                    <td class="col-lg-2">
-                        @item.Name
-                    </td>
-                    <td class="col-lg-4">
-                        @item.Description
+                    <td class="col-lg-1">
+                        @item.ProductId
                     </td>
                     <td class="col-lg-1">
-                        € @item.ProductPrice
-                    </td>
-                    <td class="col-lg-2">
-                        <form method="post">
-                            <div class="my-form-group form-group">
-                                <input type="number" name="quantity" id="quantity">
-                            </div>
-                            <div class="my-form-group form-group">
-                                <button type="submit" class="submit-button">
-                                    <span class="material-icons">shopping_cart</span>
-                                </button>
-                            </div>
-                        </form>
+                        @item.Quantity
                     </td>
                 </tr>
             }
