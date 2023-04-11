@@ -1,5 +1,4 @@
-﻿@model dynamic
-@*@model List<EggSplorer.Models.Products>*@
+﻿@model List<EggSplorer.Models.Products>
 @{
     ViewData["Title"] = "Index";
 }
@@ -36,27 +35,27 @@
             </thead>
 
             <tbody>
-                @for (var i = 0; i < Model.Products.Count; i++)
+                @for (var i = 0; i < Model.Count; i++)
                 {
                     <tr>
                         <td class="col-lg-2 text-center">
                             @{
-                                var img = Model.Products[i].Id.ToString() + ".jpg";
+                                var img = Model[i].Id.ToString() + ".jpg";
                             }
                             <img class="img-fluid" src="~/images/@img" style="height:100px; object-fit:cover">
                         </td>
                         <td class="col-lg-2">
-                            @Model.Products[i].Name
+                            @Model[i].Name
                         </td>
                         <td class="col-lg-4">
-                            @Model.Products[i].Description
+                            @Model[i].Description
                         </td>
                         <td class="col-lg-1">
-                            € @Model.Products[i].ProductPrice
+                            € @Model[i].ProductPrice
                         </td>
                         <td class="col-lg-2">
                             <div class="my-form-group form-group">
-                                <input type="hidden" name="info[@i].ProductId" value="@Model.Products[i].Id">
+                                <input type="hidden" name="info[@i].ProductId" value="@Model[i].Id">
                                 <input type="number" name="info[@i].Quantity" min="0" value="0">
                             </div>
                         </td>
@@ -70,30 +69,5 @@
             </button>
         </div>
     </form>
-    <table class="table table--bottom-margin">
-        <thead>
-            <tr>
-                <th class="col-lg-1 text-center">
-                    Id
-                </th>
-                <th class="col-lg-1 text-center">
-                    Foto
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.MiniOrderDetail)
-            {
-                <tr>
-                    <td class="col-lg-1">
-                        @item.ProductId
-                    </td>
-                    <td class="col-lg-1">
-                        @item.Quantity
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
 </body>
 </html>

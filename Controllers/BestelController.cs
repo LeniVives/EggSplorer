@@ -19,21 +19,15 @@ namespace EggSplorer.Controllers
         //index with orderviewmodel
         public IActionResult Index()
         {
-            dynamic mymodel = new ExpandoObject();
-            mymodel.Products = _context.Products.ToList();
-            mymodel.MiniOrderDetail = new List<MiniOrderDetail>();
+            var mymodel = _context.Products.ToList();
             return View(mymodel);
         }
         [HttpPost]
         public IActionResult Index(List<MiniOrderDetail> info)
         {
-            if (info == null)
-                return View("Winkelmandje");
+            // Do things with info.
 
-            dynamic mymodel = new ExpandoObject();
-            mymodel.Products = _context.Products.ToList();
-            mymodel.MiniOrderDetail = info;
-
+            var mymodel = _context.Products.ToList();
             return View(mymodel);
         }
 
