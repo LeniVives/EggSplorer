@@ -3,6 +3,7 @@ using EggSplorer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System.Dynamic;
 
 namespace EggSplorer.Controllers
 {
@@ -18,13 +19,18 @@ namespace EggSplorer.Controllers
         //index with orderviewmodel
         public IActionResult Index()
         {
-            var orderViewModel = new OrderViewModel
-            {
-                OrderDetails = new OrderDetails(),
-                Products = _context.Products.ToList()
-            };
-            return View(orderViewModel);
+            var mymodel = _context.Products.ToList();
+            return View(mymodel);
         }
+        [HttpPost]
+        public IActionResult Index(List<MiniOrderDetail> info)
+        {
+            // Do things with info.
+
+            var mymodel = _context.Products.ToList();
+            return View(mymodel);
+        }
+
 
         //[HttpPost]
         //public ActionResult AddOrderDetail(OrderViewModel model, int amount)
