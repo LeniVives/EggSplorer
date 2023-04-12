@@ -26,6 +26,9 @@
                         Aantal
                     </th>
                     <th class="col-lg-1">
+                        Prijs per stuk
+                    </th>
+                    <th class="col-lg-1">
                         Samengestelde Prijs
                     </th>
                 </tr>
@@ -56,6 +59,9 @@
                             </td>
                             <td class="col-lg-1">
                                 @Model.Details[i].Quantity
+                            </td>
+                            <td class="col-lg-1">
+                                @Model.Products[i].ProductPrice
                             </td>
                             @{
                                 var combined = product.ProductPrice * Model.Details[i].Quantity;

@@ -4,6 +4,7 @@ using EggSplorer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EggSplorer.Migrations
 {
     [DbContext(typeof(EggsplorerContext))]
-    partial class EggsplorerContextModelSnapshot : ModelSnapshot
+    [Migration("20230412013417_DeleteOrderFullfilled")]
+    partial class DeleteOrderFullfilled
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
