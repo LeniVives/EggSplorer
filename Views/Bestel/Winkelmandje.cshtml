@@ -16,6 +16,9 @@
         <table class="table table--bottom-margin">
             <thead>
                 <tr>
+                    <th class="col-lg-1">
+                        Foto
+                    </th>
                     <th class="col-lg-2">
                         Naam
                     </th>
@@ -28,6 +31,7 @@
                 </tr>
             </thead>
             <tbody>
+                @{ decimal total = 0; }
                 @for (var i = 0; i < Model.Details.Count; i++)
                 {
                     @if (Model.Details[i].Quantity != 0)
@@ -40,8 +44,13 @@
                                 product = item;
                             }
                         }
-
                         <tr>
+                            <td class="col-lg-1 text-center">
+                                @{
+                                    var img = product.Id.ToString() + ".jpg";
+                                }
+                                <img class="img-fluid" src="~/images/@img" style="height:100px; object-fit:cover">
+                            </td>
                             <td class="col-lg-2">
                                 @product.Name
                             </td>
@@ -49,10 +58,11 @@
                                 @Model.Details[i].Quantity
                             </td>
                             @{
-                                var totalprice = product.ProductPrice * Model.Details[i].Quantity;
+                                var combined = product.ProductPrice * Model.Details[i].Quantity;
+                                total += combined;
                             }
                             <td class="col-lg-1">
-                                € @totalprice
+                                € @combined
                             </td>
                             <div class="my-form-group form-group">
                                 <input type="hidden" name="info[@i].ProductId" value="@Model.Details[i].ProductId">
@@ -62,9 +72,12 @@
                     }
                 }
                 <tr>
-                    <td class ="col-lg-2"></td>
                     <td class="col-lg-1"></td>
-                    <td></td>
+                    <td class="col-lg-2"></td>
+                    <td class="col-lg-1"></td>
+                    <td class="col-lg-1">
+                        <b>Total:</b> € @total
+                    </td>
                 </tr>
             </tbody>
         </table>
