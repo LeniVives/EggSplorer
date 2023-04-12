@@ -32,14 +32,9 @@ namespace EggSplorer.Controllers
                 return View(mymodel);
             }
 
-            var temp = 0;
+            info = info.Where(i => i.Quantity > 0).ToList();
 
-            foreach (var item in info)
-            {
-                temp += item.Quantity;
-            }
-
-            if (temp <= 0)
+            if (info.Count == 0)
             {
                 var mymodel = _context.Products.ToList();
                 return View(mymodel);
