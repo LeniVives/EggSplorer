@@ -3,55 +3,44 @@
     ViewData["Title"] = "pIndex";
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Admin overzicht producten</title>
-    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="/css/site.css" />
-</head>
-<body>
-    <table class="table table--bottom-margin">
-        <thead>
-            <tr>
-                <th class="col-lg-2 text-center">
-                    Foto
-                </th>
-                <th class="col-lg-2">
-                    Naam
-                </th>
-                <th class="col-lg-4">
-                    Beschrijving
-                </th>
-                <th class="col-lg-1">
-                    Prijs
-                </th>
-            </tr>
-        </thead>
+<table class="table table--bottom-margin">
+    <thead>
+        <tr>
+            <th class="col-lg-2 text-center">
+                Foto
+            </th>
+            <th class="col-lg-2">
+                Naam
+            </th>
+            <th class="col-lg-4">
+                Beschrijving
+            </th>
+            <th class="col-lg-1">
+                Prijs
+            </th>
+        </tr>
+    </thead>
 
-        <tbody>
-            @for (var i = 0; i < Model.Count; i++)
-            {
-                <tr>
-                    <td class="col-lg-2 text-center">
-                        @{
-                            var img = Model[i].Id.ToString() + ".jpg";
-                        }
-                        <img class="img-fluid" src="~/images/@img" style="height:100px; object-fit:cover">
-                    </td>
-                    <td class="col-lg-2">
-                        @Model[i].Name
-                    </td>
-                    <td class="col-lg-4">
-                        @Model[i].Description
-                    </td>
-                    <td class="col-lg-1">
-                        € @Model[i].ProductPrice
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</body>
-</html>
+    <tbody>
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td class="col-lg-2 text-center">
+                    @{
+                        var img = Model[i].Id.ToString() + ".jpg";
+                    }
+                    <img class="img-fluid" src="~/images/@img" style="height:100px; object-fit:cover">
+                </td>
+                <td class="col-lg-2">
+                    @Model[i].Name
+                </td>
+                <td class="col-lg-4">
+                    @Model[i].Description
+                </td>
+                <td class="col-lg-1">
+                    € @Model[i].ProductPrice
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
