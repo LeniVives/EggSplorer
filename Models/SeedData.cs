@@ -31,6 +31,10 @@ namespace EggSplorer.Models
                     new Products { Name = "Kinder Surprise", Description = "Doosje met 3 Kinder Surprise eieren", ProductPrice = 2.49m },
                     new Products { Name = "Eggsplorer Special", Description = "Onze special. 1 groot gedecoreerd ei met een leuk paastafereel. Ideaal als geschenk!", ProductPrice = 9.99m }
                 );
+
+                context.Users.AddRange(
+                    new Users { FirstName = "Leni", LastName = "Demeulemeester", Email = "hi@mi.com", IsAdmin = true, IsApproved = true, Password = "1234", PhoneNumber = 5678 }
+                    );
                 context.SaveChanges();
             }
         }
