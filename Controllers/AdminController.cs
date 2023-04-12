@@ -1,4 +1,5 @@
 ﻿using EggSplorer.Data;
+using EggSplorer.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EggSplorer.Controllers
@@ -62,13 +63,30 @@ namespace EggSplorer.Controllers
         {
             return View();
         }
-        public IActionResult pEdit()
+        [HttpPost]
+        public IActionResult pCreate(Products product)
         {
+            if(ModelState.IsValid)
+            {
+                // Add the order to the database
+                _context.Products.Add(product);
+                _context.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
             return View();
         }
-        public IActionResult pDelete()
+        [HttpPost]
+        public IActionResult pEdit(int id)
         {
-            return View();
+            Products product = _context.Products.Where(p => p.Id == id).First();
+            return View(product);
+        }
+        [HttpPost]
+        public IActionResult pDelete(int id)
+        {
+            Products product = _context.Products.Where(p => p.Id == id).First();
+            return View(product);
         }
     }
 }
