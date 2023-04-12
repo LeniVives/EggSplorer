@@ -32,33 +32,12 @@ namespace EggSplorer.Controllers
                 return View(mymodel);
             }
 
-            var order = new Orders
-            {
-                OrderPlaced = DateTime.Now,
-                UserID = 0,
-                OrderDetail = new List<OrderDetails>()
-            };
-
             var temp = 0;
 
             foreach (var item in info)
             {
                 temp += item.Quantity;
-
-                //make new orderDetails
-                var newOrderDetail = new OrderDetails
-                {
-                    Quantity = item.Quantity,
-                    ProductId = item.ProductId
-                };
-
-                // Add the new order item to the order
-                order.OrderDetail.Add(newOrderDetail);
             }
-
-            // Add the order to the database
-            _context.Orders.Add(order);
-            _context.SaveChanges();
 
             if (temp <= 0)
             {
@@ -79,8 +58,33 @@ namespace EggSplorer.Controllers
             return View();
         }
 
-        public IActionResult Thankyou()
+        [HttpPost]
+        public IActionResult Thankyou(List<MiniOrderDetail> info)
         {
+            var order = new Orders
+            {
+                OrderPlaced = DateTime.Now,
+                UserID = 0,
+                OrderDetail = new List<OrderDetails>()
+            };
+
+            foreach (var item in info)
+            {
+                //make new orderDetails
+                var newOrderDetail = new OrderDetails
+                {
+                    Quantity = item.Quantity,
+                    ProductId = item.ProductId
+                };
+
+                // Add the new order item to the order
+                order.OrderDetail.Add(newOrderDetail);
+            }
+
+            // Add the order to the database
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+
             return View();
         }
     }
