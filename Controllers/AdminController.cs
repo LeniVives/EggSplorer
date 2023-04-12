@@ -4,6 +4,17 @@ namespace EggSplorer.Controllers
 {
     public class AdminController : Controller
     {
+        public IActionResult index()
+        {
+            return View();
+        }
+
+        //-------------------------------------------------------------------
+
+        public IActionResult bestellingen()
+        {
+            return View();
+        }
         public IActionResult bEdit()
         {
             return View();
@@ -15,6 +26,10 @@ namespace EggSplorer.Controllers
 
         //-------------------------------------------------------------------
 
+        public IActionResult goedkeuring()
+        {
+            return View();
+        }
         public IActionResult gCreate()
         {
             return View();
@@ -30,6 +45,10 @@ namespace EggSplorer.Controllers
 
         //-------------------------------------------------------------------
 
+        public IActionResult producten()
+        {
+            return View();
+        }
         public IActionResult pCreate()
         {
             return View();
