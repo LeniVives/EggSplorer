@@ -1,5 +1,67 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<EggSplorer.Models.Users>
 @{
+    ViewData["Title"] = "gIndex";
 }
+
+<table class="table table--bottom-margin">
+    <thead>
+        <tr>
+            <th class="col-lg-1 text-center">
+                ID
+            </th>
+            <th class="col-lg-1 text-center">
+                Voornaam
+            </th>
+            <th class="col-lg-1 text-center">
+                Achternaam
+            </th>
+            <th class="col-lg-4 text-center">
+				Email
+            </th>
+            <th class="col-lg-4 text-center">
+                Telefoonnummer
+            </th>
+            <th class="col-lg-1 text-center">
+                Paswoord
+            </th>
+            <th class="col-lg-1 text-center">
+                Admin?
+            </th>
+            <th class="col-lg-1 text-center">
+                Goedgekeurd?
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @for (var i = 0; i < Model.Count; i++)
+        {
+                <tr>
+                    <td class="col-lg-2 text-center">
+                            @Model[i].ID
+                    </td>
+                    <td class="col-lg-2 text-center">
+                            @Model[i].FirstName
+                    </td>
+                    <td class="col-lg-4 text-center">
+                            @Model[i].LastName
+                    </td>
+                    <td class="col-lg-4 text-center">
+                            @Model[i].Email
+                    </td>
+                    <td class="col-lg-4 text-center">
+                            @Model[i].PhoneNumber
+                    </td>
+                    <td class="col-lg-1 text-center">
+                            @Model[i].Password
+                    </td>
+                    <td class="col-lg-1 text-center">
+                            @Model[i].IsAdmin
+                    </td>
+                    <td class="col-lg-1 text-center">
+                            @Model[i].IsApproved
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>

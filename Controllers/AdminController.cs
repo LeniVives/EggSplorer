@@ -37,7 +37,8 @@ namespace EggSplorer.Controllers
 
         public IActionResult gIndex()
         {
-            return View();
+            var mymodel = _context.Users.ToList();
+            return View(mymodel);
         }
         public IActionResult gCreate()
         {
