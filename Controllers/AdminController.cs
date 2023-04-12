@@ -1,9 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using EggSplorer.Data;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EggSplorer.Controllers
 {
     public class AdminController : Controller
     {
+        private readonly EggsplorerContext _context;
+
+        public AdminController(EggsplorerContext context)
+        {
+            _context = context;
+        }
+
         public IActionResult index()
         {
             return View();
@@ -47,7 +55,8 @@ namespace EggSplorer.Controllers
 
         public IActionResult pIndex()
         {
-            return View();
+            var mymodel = _context.Products.ToList();
+            return View(mymodel);
         }
         public IActionResult pCreate()
         {
