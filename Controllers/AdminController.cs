@@ -11,7 +11,7 @@ namespace EggSplorer.Controllers
 
         //-------------------------------------------------------------------
 
-        public IActionResult bestellingen()
+        public IActionResult bIndex()
         {
             return View();
         }
@@ -26,7 +26,7 @@ namespace EggSplorer.Controllers
 
         //-------------------------------------------------------------------
 
-        public IActionResult goedkeuring()
+        public IActionResult gIndex()
         {
             return View();
         }
@@ -45,7 +45,7 @@ namespace EggSplorer.Controllers
 
         //-------------------------------------------------------------------
 
-        public IActionResult producten()
+        public IActionResult pIndex()
         {
             return View();
         }
