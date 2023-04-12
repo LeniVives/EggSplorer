@@ -1,5 +1,25 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model EggSplorer.Models.Products
 @{
+    ViewData["Title"] = "Create product";
 }
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>RsvpForm</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+    <h5 class="text-center m-2 p-2">Create a product in the database</h5>
+    <form asp-action="pCreate" method="post" class="m-2">
+        <div asp-validation-summary="All"></div>
+        <div class="form-group"> <label asp-for="Name" class="form-label">Name:</label> <input asp-for="Name" class="form-control" />  </div>
+        <div class="form-group"> <label asp-for="Description" class="form-label">Description:</label> <input asp-for="Description" class="form-control" /> </div>
+        <div class="form-group"> <label asp-for="ProductPrice" class="form-label">ProductPrice:</label> <input asp-for="ProductPrice" class="form-control" /> </div>
+ 
+        <button type="submit" class="btn btn-primary mt-3">Create</button>
+    </form>
+</body>
+</html>
