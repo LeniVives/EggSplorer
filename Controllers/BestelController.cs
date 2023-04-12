@@ -59,7 +59,7 @@ namespace EggSplorer.Controllers
             var order = new Orders
             {
                 OrderPlaced = DateTime.Now,
-                UserID = 0,
+                UserID = 1,
                 OrderDetail = new List<OrderDetails>()
             };
 
