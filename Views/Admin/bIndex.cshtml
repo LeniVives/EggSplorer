@@ -6,16 +6,16 @@
 <table class="table table--bottom-margin">
     <thead>
         <tr>
-            <th class="col-lg-4 text-center">
+            <th class="col-lg-2 text-center">
                 ID
             </th>
-            <th class="col-lg-4 text-center">
+            <th class="col-lg-2 text-center">
                 Tijdstip
             </th>
-            <th class="col-lg-4 text-center">
+            <th class="col-lg-2 text-center">
                 Gebruiker (ID)
             </th>
-            <th class="col-lg-4 text-center">
+            <th class="col-lg-6 text-center">
                 Bestelling details
             </th>
         </tr>
@@ -25,17 +25,17 @@
         @for (var i = 0; i < Model.Count; i++)
         {
             <tr>
-                <td class="col-lg-4 text-center">
+                <td class="col-lg-2 text-center">
                 @Model[i].Id
                 </td>
-                <td class="col-lg-4 text-center">
+                <td class="col-lg-2 text-center">
                 @Model[i].OrderPlaced
 
                 </td>
-                <td class="col-lg-4 text-center">
+                <td class="col-lg-2 text-center">
                 @Model[i].UserID
                 </td>
-                <td class="col-lg-4 text-center">
+                <td class="col-lg-6 text-center">
                 @Model[i].OrderDetail
                 </td>
             </tr>
