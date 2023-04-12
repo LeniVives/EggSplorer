@@ -1,5 +1,44 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<EggSplorer.Models.Orders>
 @{
+    ViewData["Title"] = "bIndex";
 }
+
+<table class="table table--bottom-margin">
+    <thead>
+        <tr>
+            <th class="col-lg-4 text-center">
+                ID
+            </th>
+            <th class="col-lg-4 text-center">
+                Tijdstip
+            </th>
+            <th class="col-lg-4 text-center">
+                Gebruiker (ID)
+            </th>
+            <th class="col-lg-4 text-center">
+                Bestelling details
+            </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @for (var i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td class="col-lg-4 text-center">
+                @Model[i].Id
+                </td>
+                <td class="col-lg-4 text-center">
+                @Model[i].OrderPlaced
+
+                </td>
+                <td class="col-lg-4 text-center">
+                @Model[i].UserID
+                </td>
+                <td class="col-lg-4 text-center">
+                @Model[i].OrderDetail
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

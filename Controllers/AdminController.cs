@@ -21,7 +21,8 @@ namespace EggSplorer.Controllers
 
         public IActionResult bIndex()
         {
-            return View();
+            var mymodel = _context.Orders.ToList();
+            return View(mymodel);
         }
         public IActionResult bEdit()
         {
