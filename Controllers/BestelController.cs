@@ -25,11 +25,30 @@ namespace EggSplorer.Controllers
         [HttpPost]
         public IActionResult Index(List<MiniOrderDetail> info)
         {
-            // Do things with info.
+			if (!ModelState.IsValid)
+            {
+				var mymodel = _context.Products.ToList();
+				return View(mymodel);
+            }
 
-            var mymodel = _context.Products.ToList();
-            return View(mymodel);
-        }
+			var temp = 0;
+			foreach (var item in info)
+			{
+				temp += item.Quantity;
+			}
+			if (temp <= 0)
+			{
+				var mymodel = _context.Products.ToList();
+				return View(mymodel);
+			}
+
+            dynamic mymodel2 = new ExpandoObject();
+            mymodel2.Products = _context.Products.ToList();
+            mymodel2.Details = info;
+
+
+            return View("Winkelmandje", mymodel2);
+		}
 
 
         //[HttpPost]

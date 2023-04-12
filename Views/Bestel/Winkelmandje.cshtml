@@ -1,5 +1,78 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model dynamic
 @{
+    ViewData["Title"] = "Winkelmandje";
 }
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>RsvpForm</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/site.css" />
+</head>
+<body>
+    <form method="post">
+        <table class="table table--bottom-margin">
+            <thead>
+                <tr>
+                    <th class="col-lg-2">
+                        Naam
+                    </th>
+                    <th class="col-lg-1">
+                        Aantal
+                    </th>
+                    <th class="col-lg-1">
+                        Samengestelde Prijs
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (var i = 0; i < Model.Details.Count; i++)
+                {
+                    @if (Model.Details[i].Quantity != 0)
+                    {
+                        var product = Model.Products[0];
+                        foreach(var item in Model.Products)
+                        {
+                            if (item.Id == Model.Details[i].ProductId)
+                            {
+                                product = item;
+                            }
+                        }
+
+                        <tr>
+                            <td class="col-lg-2">
+                                @product.Name
+                            </td>
+                            <td class="col-lg-1">
+                                @Model.Details[i].Quantity
+                            </td>
+                            @{
+                                var totalprice = product.ProductPrice * Model.Details[i].Quantity;
+                            }
+                            <td class="col-lg-1">
+                                € @totalprice
+                            </td>
+                            <div class="my-form-group form-group">
+                                <input type="hidden" name="info[@i].ProductId" value="@Model.Details[i].ProductId">
+                                <input type="hidden" name="info[@i].Quantity" value="@Model.Details[i].Quantity">
+                            </div>
+                        </tr>
+                    }
+                }
+                <tr>
+                    <td class ="col-lg-2"></td>
+                    <td class="col-lg-1"></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="my-form-group form-group">
+            <button type="submit" class="submit-button">
+                <span class="material-icons">shopping_cart</span>
+            </button>
+        </div>
+    </form>
+</body>
+</html>
