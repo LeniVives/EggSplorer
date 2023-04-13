@@ -114,9 +114,30 @@ namespace EggSplorer.Controllers
             }
             return View();
         }
-        public IActionResult gEdit()
+        [HttpPost]
+        public IActionResult gEdit(int id)
         {
-            return View();
+            Users user = _context.Users.Where(p => p.ID == id).First();
+            return View(user);
+        }
+        [HttpPost]
+        public IActionResult gEditcomplete(Users user)
+        {
+            if (ModelState.IsValid)
+            {
+                var toupdate = _context.Users.Where(p => p.ID == user.ID).First();
+
+                toupdate.FirstName = user.FirstName;
+                toupdate.LastName = user.LastName;
+                toupdate.PhoneNumber = user.PhoneNumber;
+                toupdate.Email = user.Email;
+                toupdate.Password = user.Password;
+                toupdate.IsAdmin = user.IsAdmin;
+                toupdate.IsApproved = user.IsApproved;
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("gIndex");
         }
         public IActionResult gDelete()
         {
