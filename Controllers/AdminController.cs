@@ -129,7 +129,7 @@ namespace EggSplorer.Controllers
                 _context.Products.Add(product);
                 _context.SaveChanges();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("pIndex");
             }
             return View();
         }
@@ -140,10 +140,30 @@ namespace EggSplorer.Controllers
             return View(product);
         }
         [HttpPost]
+        public IActionResult pEditcomplete(Products product)
+        {
+            if(ModelState.IsValid)
+            {
+                var toupdate = _context.Products.Where(p => p.Id == product.Id).First();
+
+                toupdate.Name = product.Name;
+                toupdate.Description = product.Description;
+                toupdate.ProductPrice = product.ProductPrice;
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("pIndex");
+        }
+        [HttpPost]
         public IActionResult pDelete(int id)
         {
             Products product = _context.Products.Where(p => p.Id == id).First();
             return View(product);
+        }
+        [HttpPost]
+        public IActionResult pDeletecomplete(int id)
+        {
+            return View("pIndex");
         }
     }
 }
