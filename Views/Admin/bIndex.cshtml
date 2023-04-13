@@ -1,102 +1,98 @@
 ﻿@model dynamic
 @{
-ViewData["Title"] = "Index Orders";
+    ViewData["Title"] = "Index Orders";
 }
 
-<table class="table table--bottom-margin">
-    <thead>
-        <tr>
-            <th class="col-lg-1 text-center">
-                Admin operatie
-            </th>
-            <th class="col-lg-1 text-center">
-                ID
-            </th>
-            <th class="col-lg-1 text-center">
-                Tijdstip
-            </th>
-            <th class="col-lg-2">
-                Klant
-            </th>
-            <th class="col-lg-1 text-center">
-                Prijs bestelling
-            </th>
-            <th class="col-lg-6 text-center">
-                Details bestelling
-            </th>
-        </tr>
-    </thead>
-
-    <tbody>
-        @for (var i = 0; i < Model.Orders.Count; i++)
-        {
+<form method="post" action="bDelete">
+    <table class="table table--bottom-margin">
+        <thead>
             <tr>
-                <td class="col-lg-1 text-center">
-                    <form method="post" action="bEdit">
-                        <input type="hidden" name="id" value="@Model.Orders[i].Id">
-                        <button type="submit" class="btn btn-link">Aanpassen</button>
-                    </form>
-                    <form method="post" action="pDelete">
-                        <input type="checkbox" name="selectedOrders" value="@Model.Orders[i].Id">
-                    </form>
-                </td>
-                        
-                <td class="col-lg-1 text-center">
-                    @Model.Orders[i].Id
-                </td>
-                <td class="col-lg-1 text-center">
-                    @Model.Orders[i].OrderPlaced
-                </td>
-                <td class="col-lg-2">
-                    @Model.Orders[i].User.FirstName @Model.Orders[i].User.LastName
-                </td>
-                <td class="col-lg-1 text-center">
-                    @Model.Orders[i].OrderTotal.ToString("0.00")
-                </td>
-                <td class="col-lg-6">
-                    <table>
-                        <tr>
-                            <th class="col-lg-1 text-center">
-                                Aantal
-                            </th>
-                            <th class="col-lg-4">
-                                Product
-                            </th>
-                            <th class="col-lg-1 text-center">
-                                Prijs/stuk
-                            </th>
-                        </tr>
+                <th class="col-lg-1 text-center">
+                    ID
+                </th>
+                <th class="col-lg-1 text-center">
+                    Tijdstip
+                </th>
+                <th class="col-lg-2">
+                    Klant
+                </th>
+                <th class="col-lg-5 text-center">
+                    Details bestelling
+                </th>
+                <th class="col-lg-1 text-center">
+                    Prijs bestelling
+                </th>
+                <th class="col-lg-1 text-center">
+                    Admin operatie
+                </th>
+            </tr>
+        </thead>
 
-                        @foreach (var detail in Model.OrderDetails)
-                        {
-                            @if (detail.OrderId == Model.Orders[i].Id)
+        <tbody>
+            @for (var i = 0; i < Model.Orders.Count; i++)
+            {
+                <tr>
+                    <td class="col-lg-1 text-center">
+                        @Model.Orders[i].Id
+                    </td>
+                    <td class="col-lg-1 text-center">
+                        @Model.Orders[i].OrderPlaced
+                    </td>
+                    <td class="col-lg-2">
+                        @Model.Orders[i].User.FirstName @Model.Orders[i].User.LastName
+                    </td>
+                    <td class="col-lg-5">
+                        <table>
+                            <tr>
+                                <th class="col-lg-1 text-center">
+                                    Aantal
+                                </th>
+                                <th class="col-lg-3">
+                                    Product
+                                </th>
+                                <th class="col-lg-1 text-center">
+                                    Prijs/stuk
+                                </th>
+                            </tr>
+
+                            @foreach (var detail in Model.OrderDetails)
                             {
-                                <tr>
-                                    <td class="col-lg-1 text-center">
-                                        @detail.Quantity
-                                    </td>
-                                    <td class="col-lg-4">
-                                        @Model.ProductNames[detail.ProductId]
-                                    </td>
-                                    <td class="col-lg-1 text-center">
-                                        @Model.ProductPrices[detail.ProductId].ToString("0.00")
-                                    </td>
-                                </tr>
+                                @if (detail.OrderId == Model.Orders[i].Id)
+                                {
+                                    <tr>
+                                        <td class="col-lg-1 text-center">
+                                            @detail.Quantity
+                                        </td>
+                                        <td class="col-lg-3">
+                                            @Model.ProductNames[detail.ProductId]
+                                        </td>
+                                        <td class="col-lg-1 text-center">
+                                            @Model.ProductPrices[detail.ProductId].ToString("0.00")
+                                        </td>
+                                    </tr>
+                                }
                             }
-                        }
-                    </table>
+                        </table>
+                    </td>
+                    <td class="col-lg-1 text-center">
+                        @Model.Orders[i].OrderTotal.ToString("0.00")
+                    </td>
+                    <td class="col-lg-1 text-center">
+                        <input type="checkbox" name="selectedOrders" value="@Model.Orders[i].Id">
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="12" class ="text-center">
+                    TOTAALPRIJS: @Model.TotalPrice.ToString("0.00")
                 </td>
             </tr>
-        }
-    </tbody>
-    <tfoot>
-        <tr>
-            <td colspan="12" class ="text-center">
-                TOTAALPRIJS: @Model.TotalPrice.ToString("0.00")
-            </td>
-        </tr>
-    </tfoot>
-</table>
-<div class="align-items-end">
-    <button type="submit" class="btn btn-link">Geselecteerde bestellingen verwijderen</button>
-</div>
+        </tfoot>
+    </table>
+    <div class="align-items-end">
+        <button type="submit" class="btn btn-link">Geselecteerde bestellingen verwijderen</button>
+    </div>
+
+</form>
