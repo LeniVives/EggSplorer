@@ -106,7 +106,7 @@ namespace EggSplorer.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Add the order to the database
+                // Add the admin to the database
                 _context.Users.Add(user);
                 _context.SaveChanges();
 
@@ -139,10 +139,18 @@ namespace EggSplorer.Controllers
 
             return RedirectToAction("gIndex");
         }
-        public IActionResult gDelete()
+        [HttpPost]
+        public IActionResult gDelete(int id)
         {
-            return View();
+            var user = _context.Users.Find(id);
+            if (user != null)
+            {
+                _context.Users.Remove(user);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("gIndex");
         }
+
 
         //-------------------------------------------------------------------
 
