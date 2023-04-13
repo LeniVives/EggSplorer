@@ -1,6 +1,8 @@
 ﻿using EggSplorer.Data;
 using EggSplorer.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Dynamic;
 
 namespace EggSplorer.Controllers
 {
@@ -22,17 +24,38 @@ namespace EggSplorer.Controllers
 
         public IActionResult bIndex()
         {
-            var mymodel = _context.Orders.ToList();
-            return View(mymodel);
+            var orderDetails = _context.OrderDetails.ToList();
+            var orders = _context.Orders.Include(o => o.User).ToList();
+            var products = _context.Products.ToList();
+            var productNames = products.ToDictionary(p => p.Id, p => p.Name);
+
+
+            dynamic mymodel = new ExpandoObject();
+            mymodel.Orders = orders;
+            mymodel.OrderDetails = orderDetails;
+            mymodel.ProductNames = productNames;
+
+            return View("bIndex", mymodel);
         }
+
         public IActionResult bEdit()
         {
             return View();
         }
-        public IActionResult bDelete()
+
+        [HttpPost]
+        public IActionResult bDelete(int id)
         {
-            return View();
+            var order = _context.Orders.Find(id);
+            var orderDetails = _context.OrderDetails.Where(od => od.OrderId == id).ToList();
+
+            _context.Orders.Remove(order);
+            _context.OrderDetails.RemoveRange(orderDetails);
+            _context.SaveChanges();
+
+            return RedirectToAction("bIndex");
         }
+
 
         //-------------------------------------------------------------------
 
