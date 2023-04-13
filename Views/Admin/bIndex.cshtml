@@ -16,13 +16,13 @@
                 <th class="col-lg-1 text-center align-middle">
                     Tijdstip
                 </th>
-                <th class="col-lg-2">
+                <th class="col-lg-2 align-middle">
                     Klant
                 </th>
-                <th class="col-lg-1 text-center">
+                <th class="col-lg-1 text-center align-middle">
                     Prijs bestelling
                 </th>
-                <th class="col-lg-6 text-center">
+                <th class="col-lg-6 text-center align-middle">
                     Details bestelling
                 </th>
             </tr>
@@ -32,19 +32,19 @@
             @for (var i = 0; i < Model.Orders.Count; i++)
             {
                 <tr>
-                    <td class="col-lg-1 text-center">
+                    <td class="col-lg-1 text-center align-middle">
                         <input type="checkbox" name="selectedOrders" value="@Model.Orders[i].Id">
                     </td>
-                    <td class="col-lg-1 text-center">
+                    <td class="col-lg-1 text-center align-middle">
                         @Model.Orders[i].Id
                     </td>
-                    <td class="col-lg-1 text-center">
+                    <td class="col-lg-1 text-center align-middle">
                         @Model.Orders[i].OrderPlaced
                     </td>
-                    <td class="col-lg-2">
+                    <td class="col-lg-2 align-middle">
                         @Model.Orders[i].User.FirstName @Model.Orders[i].User.LastName
                     </td>
-                    <td class="col-lg-1 text-center">
+                    <td class="col-lg-1 text-center align-middle">
                         @Model.Orders[i].OrderTotal.ToString("0.00")
                     </td>
                     <td class="col-lg-6">
@@ -86,13 +86,13 @@
         <tfoot>
             <tr>
                 <td colspan="12" class ="text-center">
-                    TOTAALPRIJS: @Model.TotalPrice.ToString("0.00")
+                    <b>TOTAALPRIJS: </b>@Model.TotalPrice.ToString("0.00")
                 </td>
             </tr>
         </tfoot>
     </table>
     <div class="align-items-end">
-        <button type="submit" class="btn btn-link">Geselecteerde bestellingen verwijderen</button>
+        <button type="submit" class="btn btn-primary">Geselecteerde bestellingen verwijderen</button>
     </div>
 
 </form>
