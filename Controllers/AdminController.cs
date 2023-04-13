@@ -29,13 +29,16 @@ namespace EggSplorer.Controllers
             var products = _context.Products.ToList();
             var productNames = products.ToDictionary(p => p.Id, p => p.Name);
             var productPrices = products.ToDictionary(p => p.Id, p => p.ProductPrice);
+            var productQuantities = orderDetails.ToDictionary(p => p.Id, p => p.Quantity);
+
             decimal totalPrice = 0;
+            int mybignum = 0;
 
             dynamic mymodel = new ExpandoObject();
             mymodel.Products = products;
             mymodel.ProductNames = productNames;
             mymodel.ProductPrices = productPrices;
-
+            mymodel.ProductQuantities = productQuantities;
             mymodel.Orders = orders;
             mymodel.OrderDetails = orderDetails;
 
@@ -52,7 +55,23 @@ namespace EggSplorer.Controllers
                     }
                 }
             }
+
+            foreach (var product in products)
+            {
+                int mynum = 0;
+                foreach (var detail in orderDetails)
+                {
+                    if (detail.ProductId == product.Id)
+                    {
+                        int myothernum = detail.Quantity;
+                        mynum += myothernum;
+                        mybignum += mynum;
+                    }
+                }
+            }
+
             mymodel.TotalPrice = totalPrice;
+            mymodel.TotalQuantity = mybignum;
 
             return View("bIndex", mymodel);
         }

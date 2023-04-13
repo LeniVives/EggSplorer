@@ -83,16 +83,42 @@
                 </tr>
             }
         </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="12" class ="text-center">
-                    <b>TOTAALPRIJS: </b>@Model.TotalPrice.ToString("0.00")
-                </td>
-            </tr>
-        </tfoot>
     </table>
     <div class="align-items-end">
         <button type="submit" class="btn btn-primary">Geselecteerde bestellingen verwijderen</button>
     </div>
 
 </form>
+
+<br />
+<br />
+<h1>Overzicht</h1>
+<table>
+    <thead>
+        <tr>
+            <th class="align-middle">Product</th>
+            <th class="text-center align-middle">Aantal</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (var i = 0; i < Model.Products.Count; i++)
+        {
+            <tr>
+                <td class="align-middle">
+                    @Model.ProductNames[Model.Products[i].Id]
+                </td>
+                @*                <td class="text-center align-middle">
+                    @Model.ProductQuantities[i]
+                </td>*@
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td>
+                <b>TOTAALPRIJS: </b>@Model.TotalPrice.ToString("0.00")
+            </td>
+        </tr>
+    </tfoot>
+
+</table>
