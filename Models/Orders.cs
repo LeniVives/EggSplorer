@@ -6,6 +6,8 @@
 
         public DateTime OrderPlaced { get; set; }
 
+        public decimal OrderTotal { get; set; }
+
         public int UserID { get; set; }
 
         public Users User { get; set; } = null!;

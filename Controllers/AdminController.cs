@@ -28,15 +28,36 @@ namespace EggSplorer.Controllers
             var orders = _context.Orders.Include(o => o.User).ToList();
             var products = _context.Products.ToList();
             var productNames = products.ToDictionary(p => p.Id, p => p.Name);
-
+            var productPrices = products.ToDictionary(p => p.Id, p => p.ProductPrice);
+            decimal totalPrice = 0;
 
             dynamic mymodel = new ExpandoObject();
+            mymodel.Products = products;
+            mymodel.ProductNames = productNames;
+            mymodel.ProductPrices = productPrices;
+
             mymodel.Orders = orders;
             mymodel.OrderDetails = orderDetails;
-            mymodel.ProductNames = productNames;
+
+            foreach (var order in orders)
+            {
+                decimal orderPrice = 0;
+                foreach (var detail in orderDetails)
+                {
+                    if (detail.OrderId == order.Id)
+                    {
+                        decimal productPrice = detail.Quantity * detail.Product.ProductPrice;
+                        orderPrice += productPrice;
+                        totalPrice += productPrice;
+                    }
+                }
+            }
+            mymodel.TotalPrice = totalPrice;
 
             return View("bIndex", mymodel);
         }
+
+
 
         public IActionResult bEdit()
         {
@@ -44,17 +65,29 @@ namespace EggSplorer.Controllers
         }
 
         [HttpPost]
-        public IActionResult bDelete(int id)
+        public IActionResult bDelete(int[] selectedOrders)
         {
-            var order = _context.Orders.Find(id);
-            var orderDetails = _context.OrderDetails.Where(od => od.OrderId == id).ToList();
-
-            _context.Orders.Remove(order);
-            _context.OrderDetails.RemoveRange(orderDetails);
-            _context.SaveChanges();
+            if (selectedOrders != null)
+            {
+                foreach (var orderId in selectedOrders)
+                {
+                    var order = _context.Orders.Find(orderId);
+                    if (order != null)
+                    {
+                        var orderDetails = _context.OrderDetails.Where(od => od.OrderId == orderId);
+                        foreach (var orderDetail in orderDetails)
+                        {
+                            _context.OrderDetails.Remove(orderDetail);
+                        }
+                        _context.Orders.Remove(order);
+                        _context.SaveChanges();
+                    }
+                }
+            }
 
             return RedirectToAction("bIndex");
         }
+
 
 
         //-------------------------------------------------------------------
