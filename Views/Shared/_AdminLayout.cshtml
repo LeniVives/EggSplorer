@@ -37,26 +37,15 @@
                         </li>
                     </ul>
                 </div>
-            </div>
-        </nav>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <h2 class="display-6 mb-0 text-primary" id="clock">@ViewBag.CurrentTime</h2>
+                <div class="justify-content-end">
+                    <div>
+                        <h2 class="display-5 mb-0 text-primary align-items-end" id="clock">@ViewBag.CurrentTime</h2>
+                    </div>
                 </div>
             </div>
-        </div>
-
-
-        <script>
-            setInterval(function () {
-                var clock = document.getElementById("clock");
-                var currentTime = new Date().toLocaleTimeString();
-                clock.innerText = currentTime;
-            }, 1000);
-        </script>
+        </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -68,6 +57,14 @@
             &copy; 2023 - EggSplorer
         </div>
     </footer>
+
+    <script>
+        setInterval(function () {
+            var clock = document.getElementById("clock");
+            var currentTime = new Date().toLocaleTimeString();
+            clock.innerText = currentTime;
+        }, 1000);
+    </script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

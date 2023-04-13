@@ -59,7 +59,7 @@ namespace EggSplorer.Controllers
             var order = new Orders
             {
                 OrderPlaced = DateTime.Now,
-                UserID = 1,
+                UserID = 0,
                 OrderDetail = new List<OrderDetails>(),
                 //OrderTotal = info.Sum(i => i.Quantity * _context.Products.Find(i.ProductId).ProductPrice)
                 OrderTotal = 0
