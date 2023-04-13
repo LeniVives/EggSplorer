@@ -110,7 +110,7 @@ namespace EggSplorer.Controllers
                 _context.Users.Add(user);
                 _context.SaveChanges();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("gIndex");
             }
             return View();
         }
