@@ -39,6 +39,23 @@
                 </div>
             </div>
         </nav>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h2 class="display-6 mb-0 text-primary" id="clock">@ViewBag.CurrentTime</h2>
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+            setInterval(function () {
+                var clock = document.getElementById("clock");
+                var currentTime = new Date().toLocaleTimeString();
+                clock.innerText = currentTime;
+            }, 1000);
+        </script>
     </header>
     <div class="container">
         <main role="main" class="pb-3">

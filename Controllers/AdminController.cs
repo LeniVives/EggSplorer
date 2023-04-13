@@ -17,6 +17,10 @@ namespace EggSplorer.Controllers
 
         public IActionResult index()
         {
+            DateTime currentTime = DateTime.Now;
+            string timeString = currentTime.ToString("hh:mm:ss tt");
+
+            ViewBag.CurrentTime = timeString;
             return View();
         }
 
