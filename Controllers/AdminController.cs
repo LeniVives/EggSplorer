@@ -101,6 +101,19 @@ namespace EggSplorer.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public IActionResult gCreate(Users user)
+        {
+            if (ModelState.IsValid)
+            {
+                // Add the order to the database
+                _context.Users.Add(user);
+                _context.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
         public IActionResult gEdit()
         {
             return View();

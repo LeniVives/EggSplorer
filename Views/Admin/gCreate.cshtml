@@ -1,5 +1,51 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model EggSplorer.Models.Users
 @{
+    ViewData["Title"] = "Create product";
 }
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>RsvpForm</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+    <h5 class="text-center m-2 p-2">Create an admin in the database</h5>
+    <form asp-action="gCreate" method="post" class="m-2">
+        <div asp-validation-summary="All"></div>
+        <div class="form-group"> 
+            <label asp-for="FirstName" class="form-label">Voornaam:</label> 
+            <input asp-for="FirstName" class="form-control" />  
+        </div>
+        <div class="form-group"> 
+            <label asp-for="LastName" class="form-label">Achternaam:</label> 
+            <input asp-for="LastName" class="form-control" /> 
+        </div>
+        <div class="form-group"> 
+            <label asp-for="Email" class="form-label">Email:</label> 
+            <input asp-for="Email" class="form-control" /> 
+        </div>
+        <div class="form-group"> 
+            <label asp-for="PhoneNumber" class="form-label">Telefoonnummer:</label> 
+            <input asp-for="PhoneNumber" class="form-control" /> 
+        </div>
+        <div class="form-group"> 
+            <label asp-for="Password" class="form-label">Paswoord:</label> 
+            <input asp-for="Password" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="IsAdmin" class="form-label">Admin?:</label>
+            <input asp-for="IsAdmin" type="checkbox" />
+        </div>
+        <div class="form-group">
+            <label asp-for="IsApproved" class="form-label">Goedgekeurd:</label>
+            <input asp-for="IsApproved" type="checkbox" />
+        </div>
+
+
+        <button type="submit" class="btn btn-primary mt-3">Create</button>
+    </form>
+</body>
+</html>
