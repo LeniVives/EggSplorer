@@ -35,6 +35,7 @@ namespace EggSplorer.Controllers
             mymodel.Products = products;
             mymodel.ProductNames = productNames;
             mymodel.ProductPrices = productPrices;
+
             mymodel.Orders = orders;
             mymodel.OrderDetails = orderDetails;
 
