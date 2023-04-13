@@ -6,22 +6,22 @@ ViewData["Title"] = "Index Orders";
 <table class="table table--bottom-margin">
     <thead>
         <tr>
-            <th class="col-lg-1 text-center">
+            <th class="col-lg-1 text-center align-middle">
                 Admin operatie
             </th>
-            <th class="col-lg-1 text-center">
+            <th class="col-lg-1 text-center align-middle">
                 ID
             </th>
-            <th class="col-lg-1 text-center">
+            <th class="col-lg-1 text-center align-middle">
                 Tijdstip
             </th>
-            <th class="col-lg-2">
+            <th class="col-lg-2 align-middle">
                 Klant
             </th>
-            <th class="col-lg-1 text-center">
+            <th class="col-lg-1 text-center align-middle">
                 Prijs bestelling
             </th>
-            <th class="col-lg-6 text-center">
+            <th class="col-lg-6 text-center align-middle">
                 Details bestelling
             </th>
         </tr>
@@ -31,7 +31,7 @@ ViewData["Title"] = "Index Orders";
         @for (var i = 0; i < Model.Orders.Count; i++)
         {
             <tr>
-                <td class="col-lg-1 text-center">
+                <td class="col-lg-1 text-center  align-middle">
                     <form method="post" action="bEdit">
                         <input type="hidden" name="id" value="@Model.Orders[i].Id">
                         <button type="submit" class="btn btn-link">Aanpassen</button>
@@ -40,17 +40,17 @@ ViewData["Title"] = "Index Orders";
                         <input type="checkbox" name="selectedOrders" value="@Model.Orders[i].Id">
                     </form>
                 </td>
-                        
-                <td class="col-lg-1 text-center">
+
+                <td class="col-lg-1 text-center align-middle">
                     @Model.Orders[i].Id
                 </td>
-                <td class="col-lg-1 text-center">
+                <td class="col-lg-1 text-center align-middle">
                     @Model.Orders[i].OrderPlaced
                 </td>
-                <td class="col-lg-2">
+                <td class="col-lg-2 align-middle align-middle">
                     @Model.Orders[i].User.FirstName @Model.Orders[i].User.LastName
                 </td>
-                <td class="col-lg-1 text-center">
+                <td class="col-lg-1 text-center align-middle">
                     @Model.Orders[i].OrderTotal.ToString("0.00")
                 </td>
                 <td class="col-lg-6">
@@ -92,7 +92,7 @@ ViewData["Title"] = "Index Orders";
     <tfoot>
         <tr>
             <td colspan="12" class ="text-center">
-                TOTAALPRIJS: @Model.TotalPrice.ToString("0.00")
+                <b>TOTAALPRIJS: </b>@Model.TotalPrice.ToString("0.00")
             </td>
         </tr>
     </tfoot>
