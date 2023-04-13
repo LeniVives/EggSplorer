@@ -7,23 +7,23 @@
     <table class="table table--bottom-margin">
         <thead>
             <tr>
-                <th class="col-lg-1 text-center">
+                <th class="col-lg-1 text-center align-middle">
+                    Admin operatie
+                </th>
+                <th class="col-lg-1 text-center align-middle">
                     ID
                 </th>
-                <th class="col-lg-2 text-center">
+                <th class="col-lg-1 text-center align-middle">
                     Tijdstip
                 </th>
                 <th class="col-lg-2">
                     Klant
                 </th>
-                <th class="col-lg-5 text-center">
-                    Details bestelling
-                </th>
                 <th class="col-lg-1 text-center">
                     Prijs bestelling
                 </th>
-                <th class="col-lg-1 text-center">
-                    Admin operatie
+                <th class="col-lg-6 text-center">
+                    Details bestelling
                 </th>
             </tr>
         </thead>
@@ -33,21 +33,27 @@
             {
                 <tr>
                     <td class="col-lg-1 text-center">
+                        <input type="checkbox" name="selectedOrders" value="@Model.Orders[i].Id">
+                    </td>
+                    <td class="col-lg-1 text-center">
                         @Model.Orders[i].Id
                     </td>
-                    <td class="col-lg-2 text-center">
+                    <td class="col-lg-1 text-center">
                         @Model.Orders[i].OrderPlaced
                     </td>
                     <td class="col-lg-2">
                         @Model.Orders[i].User.FirstName @Model.Orders[i].User.LastName
                     </td>
-                    <td class="col-lg-5">
+                    <td class="col-lg-1 text-center">
+                        @Model.Orders[i].OrderTotal.ToString("0.00")
+                    </td>
+                    <td class="col-lg-6">
                         <table>
                             <tr>
                                 <th class="col-lg-1 text-center">
                                     Aantal
                                 </th>
-                                <th class="col-lg-3">
+                                <th class="col-lg-4">
                                     Product
                                 </th>
                                 <th class="col-lg-1 text-center">
@@ -63,7 +69,7 @@
                                         <td class="col-lg-1 text-center">
                                             @detail.Quantity
                                         </td>
-                                        <td class="col-lg-3">
+                                        <td class="col-lg-4">
                                             @Model.ProductNames[detail.ProductId]
                                         </td>
                                         <td class="col-lg-1 text-center">
@@ -73,12 +79,6 @@
                                 }
                             }
                         </table>
-                    </td>
-                    <td class="col-lg-1 text-center">
-                        @Model.Orders[i].OrderTotal.ToString("0.00")
-                    </td>
-                    <td class="col-lg-1 text-center">
-                        <input type="checkbox" name="selectedOrders" value="@Model.Orders[i].Id">
                     </td>
                 </tr>
             }
