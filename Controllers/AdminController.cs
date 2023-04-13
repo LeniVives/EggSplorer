@@ -214,6 +214,8 @@ namespace EggSplorer.Controllers
                     _context.Products.Remove(product);
                 }
             }
+            _context.SaveChanges();
+
             return RedirectToAction("pIndex");
         }
     }
