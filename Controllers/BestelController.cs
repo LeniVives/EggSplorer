@@ -62,8 +62,10 @@ namespace EggSplorer.Controllers
                 UserID = 1,
                 OrderDetail = new List<OrderDetails>(),
                 //OrderTotal = info.Sum(i => i.Quantity * _context.Products.Find(i.ProductId).ProductPrice)
-                OrderTotal = 5
+                OrderTotal = 0
             };
+
+            decimal totalprice = 0;
 
             foreach (var item in info)
             {
@@ -73,10 +75,13 @@ namespace EggSplorer.Controllers
                     Quantity = item.Quantity,
                     ProductId = item.ProductId
                 };
+                totalprice += item.Quantity * 
+                    _context.Products.Where(p => p.Id == item.ProductId).First().ProductPrice;
 
                 // Add the new order item to the order
                 order.OrderDetail.Add(newOrderDetail);
             }
+            order.OrderTotal = totalprice;
 
             // Add the order to the database
             _context.Orders.Add(order);
