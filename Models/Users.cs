@@ -26,6 +26,6 @@ namespace EggSplorer.Models
 
         public bool IsApproved { get; set; }
 
-        public ICollection<Orders> Order { get; set; } = null!;
+        public ICollection<Orders>? Order { get; set; } = null!;
     }
 }

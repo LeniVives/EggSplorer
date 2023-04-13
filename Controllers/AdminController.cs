@@ -129,13 +129,34 @@ namespace EggSplorer.Controllers
                 _context.Users.Add(user);
                 _context.SaveChanges();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("gIndex");
             }
             return View();
         }
-        public IActionResult gEdit()
+        [HttpPost]
+        public IActionResult gEdit(int id)
         {
-            return View();
+            Users user = _context.Users.Where(p => p.ID == id).First();
+            return View(user);
+        }
+        [HttpPost]
+        public IActionResult gEditcomplete(Users user)
+        {
+            if (ModelState.IsValid)
+            {
+                var toupdate = _context.Users.Where(p => p.ID == user.ID).First();
+
+                toupdate.FirstName = user.FirstName;
+                toupdate.LastName = user.LastName;
+                toupdate.PhoneNumber = user.PhoneNumber;
+                toupdate.Email = user.Email;
+                toupdate.Password = user.Password;
+                toupdate.IsAdmin = user.IsAdmin;
+                toupdate.IsApproved = user.IsApproved;
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("gIndex");
         }
         public IActionResult gDelete()
         {
@@ -188,15 +209,33 @@ namespace EggSplorer.Controllers
             return RedirectToAction("pIndex");
         }
         [HttpPost]
-        public IActionResult pDelete(int id)
+        public IActionResult pDelete(int[] selectedProducts)
         {
-            Products product = _context.Products.Where(p => p.Id == id).First();
-            return View(product);
+            if (selectedProducts == null)
+            {
+                return RedirectToAction("pIndex");
+            }
+            var tobedeleted = new List<Products>();
+            foreach (var productid in selectedProducts)
+            {
+                tobedeleted.Add(_context.Products.Where(p => p.Id == productid).First());
+            }
+            return View(tobedeleted);
         }
         [HttpPost]
-        public IActionResult pDeletecomplete(int id)
+        public IActionResult pDeletecomplete(int[] deleteus)
         {
-            return View("pIndex");
+            foreach (var productid in deleteus)
+            {
+                var product = _context.Products.Where(p => p.Id == productid).First();
+                if (product != null)
+                {
+                    _context.Products.Remove(product);
+                }
+            }
+            _context.SaveChanges();
+
+            return RedirectToAction("pIndex");
         }
     }
 }
