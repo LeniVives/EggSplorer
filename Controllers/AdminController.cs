@@ -169,28 +169,31 @@ namespace EggSplorer.Controllers
             return RedirectToAction("pIndex");
         }
         [HttpPost]
-        public IActionResult pDelete(int selectedProducts)
+        public IActionResult pDelete(int[] selectedProducts)
         {
-            
-            Products product = _context.Products.Where(p => p.Id == selectedProducts).First();
-            return View(product);
+            if (selectedProducts == null)
+            {
+                return RedirectToAction("pIndex");
+            }
+            var tobedeleted = new List<Products>();
+            foreach (var productid in selectedProducts)
+            {
+                tobedeleted.Add(_context.Products.Where(p => p.Id == productid).First());
+            }
+            return View(tobedeleted);
         }
         [HttpPost]
-        public IActionResult pDeletecomplete(int[] id)
+        public IActionResult pDeletecomplete(int[] deleteus)
         {
-            //if (selectedProducts != null)
-            //{
-            //    foreach (var productid in selectedProducts)
-            //    {
-            //        var order = _context.Orders.Find(orderId);
-            //        if (order != null)
-            //        {
-
-            //        }
-            //    }
-            //}
-
-            return View("pIndex");
+            foreach (var productid in deleteus)
+            {
+                var product = _context.Products.Where(p => p.Id == productid).First();
+                if (product != null)
+                {
+                    _context.Products.Remove(product);
+                }
+            }
+            return RedirectToAction("pIndex");
         }
     }
 }

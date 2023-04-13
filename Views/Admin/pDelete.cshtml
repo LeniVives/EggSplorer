@@ -1,12 +1,49 @@
-﻿@model Products
+﻿@model List<Products>
+
+<form id="delete" method="post" action="pDeletecomplete"></form>
 
 <h3>Are you sure you want to delete these products?</h3>
 <div>
-    <hr />
-
-    <form method="post" action="pDeletecomplete">
-        <input type="hidden" name="id" value="@Model.Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="pIndex">Back to List</a>
-    </form>
+    <table class="table table--bottom-margin">
+        <thead>
+            <tr>
+                <th class="col-lg-2 text-center">
+                    ID
+                </th>
+                <th class="col-lg-2">
+                    Naam
+                </th>
+                <th class="col-lg-4">
+                    Beschrijving
+                </th>
+                <th class="col-lg-1">
+                    Prijs
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (var i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <td class="col-lg-2">
+                        <input form="delete" type="hidden" name="deleteus" value="@Model[i].Id" />
+                        @Model[i].Id
+                    </td>
+                    <td class="col-lg-2">
+                        @Model[i].Name
+                    </td>
+                    <td class="col-lg-4">
+                        @Model[i].Description
+                    </td>
+                    <td class="col-lg-1">
+                        € @Model[i].ProductPrice
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    <input form="delete" type="submit" value="Delete" class="btn btn-danger" />
+    <a asp-action="pIndex">Back to List</a>
 </div>
