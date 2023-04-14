@@ -103,16 +103,17 @@
     <tbody>
         @for (var i = 0; i < Model.Details.Count; i++)
         {
+            
             <tr>
                 <td class="align-middle">
+                    @{
+                        total += Model.Details[i].Quantity * Model.Details[i].Price;
+                    }
                     @Model.Details[i].Productname
                 </td>
                 <td class="text-center align-middle">
-                    @{
-                        decimal detailtotal = Model.Details[i].Quantity * Model.Details[i].Price;
-                        total += detailtotal;
-                    }
-                    € @detailtotal
+                    
+                    @Model.Details[i].Quantity
                 </td>
             </tr>
         }

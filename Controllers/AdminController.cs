@@ -66,15 +66,20 @@ namespace EggSplorer.Controllers
             foreach(var orderdetail in orderdetails)
             {
                 var product = _context.Products.Where(p => p.Id == orderdetail.ProductId).First();
-                listdetails.Add(new OrderDetailViewModel {
-                    Quantity = orderdetail.Quantity,
-                    Productname = product.Name,
-                    Price = product.ProductPrice
-                });
+                if(!listdetails.Where(d => d.Productname == product.Name).Any())
+                {
+                    listdetails.Add(new OrderDetailViewModel
+                    {
+                        Quantity = orderdetail.Quantity,
+                        Productname = product.Name,
+                        Price = product.ProductPrice
+                    });
+                }
+                else
+                {
+                    listdetails.Where(d => d.Productname == product.Name).First().Quantity += orderdetail.Quantity;
+                }
             }
-            
-
-
 
             //var orderDetails = _context.OrderDetails.ToList();
             //var orders = _context.Orders.Include(o => o.User).ToList();
