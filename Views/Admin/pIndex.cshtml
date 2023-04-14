@@ -23,7 +23,10 @@
         <thead>
             <tr>
                 <th class="col-lg-1 text-center align-middle">
-                    Admin operatie
+                    Verwijderen
+                </th>
+                <th class="col-lg-1 text-center align-middle">
+                    Bewerken
                 </th>
                 <th class="col-lg-1 text-center align-middle">
                     ID
@@ -39,11 +42,7 @@
                 </th>
                 <th class="col-lg-1 text-center align-middle">
                     Prijs
-                </th>
-                <th class="col-lg-1 text-center align-middle">
-                    Edit
-                </th>
-                
+                </th>    
             </tr>
         </thead>
 
@@ -53,6 +52,12 @@
                 <tr>
                     <td class="col-lg-1 text-center align-middle">
                         <input form="deleteform" type="checkbox" name="selectedProducts" value="@Model[i].Id">
+                    </td>
+                    <td class="col-lg-1 text-center align-middle">
+                        <form method="post" action="pEdit">
+                            <input type="hidden" name="id" value="@Model[i].Id">
+                            <button type="submit" class="btn btn-primary">Bewerken</button>
+                        </form>
                     </td>
                     <td class="col-lg-1 text-center align-middle">
                         @Model[i].Id
@@ -71,12 +76,6 @@
                     </td>
                     <td class="col-lg-1 text-center align-middle">
                         € @Model[i].ProductPrice
-                    </td>
-                    <td class="col-lg-1 text-center align-middle">
-                        <form method="post" action="pEdit">
-                            <input type="hidden" name="id" value="@Model[i].Id">
-                            <button type="submit" class="btn btn-primary">Bewerken</button>
-                        </form>
                     </td>
                 </tr>
             }
