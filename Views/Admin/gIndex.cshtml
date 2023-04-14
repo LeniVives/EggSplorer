@@ -3,7 +3,7 @@
     ViewData["Title"] = "gIndex";
 }
 
-<a href="@Url.Action("gCreate")" class="btn btn-success">Create</a>
+<a href="@Url.Action("gCreate")" class="btn btn-success">Maak aan</a>
 <br>
 
 <table class="table table--bottom-margin">
@@ -34,10 +34,10 @@
                 Goedgekeurd?
             </th>
             <th class="col-lg-1 text-center">
-                Edit
+                Bewerken
             </th>
             <th class="col-lg-1 text-center">
-                Delete
+                Verwijderen
             </th>
 
         </tr>
@@ -74,13 +74,13 @@
                 <td class="col-lg-1">
                     <form method="post" action="gEdit">
                         <input type="hidden" name="id" value="@Model[i].ID">
-                        <button type="submit" class="btn btn-primary">Edit</button>
+                        <button type="submit" class="btn btn-primary">Bewerken</button>
                     </form>
                 </td>
                 <td class="col-lg-1">
                     <form method="post" action="gDelete">
                         <input type="hidden" name="id" value="@Model[i].ID">
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" class="btn btn-danger">Verwijderen</button>
                     </form>
                 </td>
                 </tr>
