@@ -24,33 +24,25 @@ namespace EggSplorer.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(List<MiniOrderDetail> info)
+        public IActionResult Winkelmandje(List<MiniOrderDetail> info)
         {
             if (!ModelState.IsValid)
             {
-                var mymodel = _context.Products.ToList();
-                return View(mymodel);
+                return RedirectToAction("Index");
             }
 
             info = info.Where(i => i.Quantity > 0).ToList();
 
             if (info.Count == 0)
             {
-                var mymodel = _context.Products.ToList();
-                return View(mymodel);
+                return RedirectToAction("Index");
             }
 
-            dynamic mymodel2 = new ExpandoObject();
-            mymodel2.Products = _context.Products.ToList();
-            mymodel2.Details = info;
+            dynamic mymodel = new ExpandoObject();
+            mymodel.Products = _context.Products.ToList();
+            mymodel.Details = info;
 
-            return View("Winkelmandje", mymodel2);
-        }
-
-
-        public IActionResult Winkelmandje()
-        {
-            return View();
+            return View(mymodel);
         }
 
         [HttpPost]
