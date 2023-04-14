@@ -6,8 +6,7 @@
 - Jarno Pot
 
 ## GitHub
-Ons project staat public op GitHub:
-https://github.com/LeniVives/EggSplorer
+Ons project staat public op [GitHub](https://github.com/LeniVives/EggSplorer)
 
 
 ## Alvorens het runnen van het programma
