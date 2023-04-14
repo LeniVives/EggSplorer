@@ -10,7 +10,8 @@
 Run volgend script in dbo.Users:
 ```
 SET IDENTITY_INSERT [dbo].[Users] ON
-INSERT INTO [dbo].[Users] ([ID], [FirstName], [LastName], [PhoneNumber], [Email], [Password], [IsAdmin], [IsApproved]) VALUES (0, N'Admin', N'EggSplorer', 0691413321, N'admin1@eggsplorer.com', N'1234', 1, 1)
+INSERT INTO [dbo].[Users] ([ID], [FirstName], [LastName], [PhoneNumber], [Email], [Password], [IsAdmin], [IsApproved]) 
+VALUES (0, N'Admin', N'EggSplorer', 0691413321, N'admin1@eggsplorer.com', N'1234', 1, 1)
 SET IDENTITY_INSERT [dbo].[Users] OFF
 ```
 Dit maakt onze stanaardgebruiker aan die we hardcoded meegeven bij het plaasten van bestellingen aangezien we authenticatie niet werkende hebben gekregen.
@@ -29,9 +30,9 @@ Dit betekent dat iedereen naar ons admin gedeelte van de website kan navigeren.
 We hebben wel een aparte layout voorzien voor de admins zodat dit toch lijkt alsof we een afgezonderd deel voor admins hebben.
 
 
-## Punten waarmee rekening met gehouden moet worden
+## Punten waarmee rekening gehouden moet worden
 ### Voor de gebruikers
-1. Homepagina
+1. Home
 	- `/Home`
 	- Altijd leuk om een welkompagina te hebben met een kleine introductie
 
@@ -51,19 +52,21 @@ We hebben wel een aparte layout voorzien voor de admins zodat dit toch lijkt als
 		- Alle bestellingen worden wel geregistreerd onder onze standaardgebruiker met ID = 0 (wordt hardcoded meegegeven)
 		- Dit gebeurt via een handige tabel die all producten oplijst en waar je gewoon het aantal meegeeft
 		- Onderaan klik je dan op het winkelwandje 
-		- Deze verwijst je door naar een bevestigingspagina waar je je order kan zien
+		- Deze verwijst je door naar een bevestigingspagina `/Bestel/Winkelmandje` waar je je order kan zien
 		- Hier bevestig je effectief nog je bestelling door opnieuw op het winkelmandje te klikken
 		- Als laatste kom je op de bedank pagina met enkele navigatieknoppen
 	- Enkel geregistreerde gebruikers kunnen bestellingen plaatsen. 
 		- Dit werkt enkel via onze hardcoded user met ID = 0
 
-5. Registreren
-	- `/Home/Registratie`
-	- Deze werkt niet
-
-6. Inloggen
+5. Inloggen
 	- `/Home/Login`
 	- Deze werkt niet
+	
+6. Registratie
+	- `/Home/Registratie`
+	- Deze werkt
+	- Een user wordt aangemaakt met de properties `IsAdmin = false` en `IsApproved = false`
+
 
 ### Voor de admins
 1. Admin
@@ -89,8 +92,9 @@ We hebben wel een aparte layout voorzien voor de admins zodat dit toch lijkt als
 		- In bulk verwijderen werkt door middel van een checkbox
 	- De website dient vanaf 14u30 alle bestellingen te verwijderen zodat er de volgende dag opnieuw besteld kan worden. 
 		- Dit is niet geïmplementeerd
+		- We tonen wel een klok op de pagina's van de admins met `Viewbag`
 
-6. Producten
+4. Producten
 	- `/Admin/pIndex`
 	- Een pagina waar een administrator kan inloggen en prijzen van de producten aanpassen
 		- Een inlogpagina is niet operationeel, aanpassen van de prijzen lukt wel
@@ -105,7 +109,7 @@ We hebben wel een aparte layout voorzien voor de admins zodat dit toch lijkt als
 		- Er is een knop `Bewerken`	bij elke product om een product te bewerken, deze verwijst je door naar `/Admin/pEdit`
 			- Zowel naam, beschrijving en prijs kan je aanpassen
 
-7. Gebruikers
+5. Gebruikers
 	- `/Admin/gIndex`
 	- Een pagina waar een administrator een andere administrator kan maken of verwijderen
 		- Dit werkt volledig zoals het hoort
