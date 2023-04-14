@@ -1,9 +1,9 @@
-# Eggsplorer
-
-## Groep 1
-Leni Demeulemeester
-Jasper Dick
-Jarno Pot
+# Projectwerk .NET
+## EggSplorer
+**Groep 1**
+- Leni Demeulemeester
+- Jasper Dick
+- Jarno Pot
 
 
 ## Alvorens het runnen van het programma
@@ -15,6 +15,12 @@ SET IDENTITY_INSERT [dbo].[Users] OFF
 ```
 Dit maakt onze stanaardgebruiker aan die we hardcoded meegeven bij het plaasten van bestellingen aangezien we authenticatie niet werkende hebben gekregen.
 Alle bestellingen worden dus geregistreerd onder deze gebruiker.
+Bij de pagina om gebruikers en admins te bewerken of verwijderen, zorgen we ervoor dat deze user niet getoond wordt op de pagina zodat deze ook niet kan verwijderd worden.
+
+Run ook volgend commando in de Package Manager Console:
+```
+Update-Database
+```
 
 
 ## Wat niet gelukt is
@@ -23,7 +29,7 @@ Dit betekent dat iedereen naar ons admin gedeelte van de website kan navigeren.
 We hebben wel een aparte layout voorzien voor de admins zodat dit toch lijkt alsof we een afgezonderd deel voor admins hebben.
 
 
-## Punten waarmee rekening mee gehouden moet worden
+## Punten waarmee rekening met gehouden moet worden
 ### Voor de gebruikers
 1. Homepagina
 	- `/Home`
@@ -42,7 +48,7 @@ We hebben wel een aparte layout voorzien voor de admins zodat dit toch lijkt als
 	- `/Bestel/Index`
 	- Een pagina waar een geregistreerde gebruiker een bestelling kan plaatsen:
 		- Een bestelling plaatsen lukt
-		- Alle bestellingen worden wel geregistreerd onder onze standaardgebruiker met ID 0 (wordt hardcoded meegegeven)
+		- Alle bestellingen worden wel geregistreerd onder onze standaardgebruiker met ID = 0 (wordt hardcoded meegegeven)
 		- Dit gebeurt via een handige tabel die all producten oplijst en waar je gewoon het aantal meegeeft
 		- Onderaan klik je dan op het winkelwandje 
 		- Deze verwijst je door naar een bevestigingspagina waar je je order kan zien
