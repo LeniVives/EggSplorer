@@ -57,6 +57,7 @@ namespace EggSplorer.Controllers
                     OrderId = order.Id,
                     OrderPlaced = order.OrderPlaced,
                     Username = user.FirstName + " " + user.LastName,
+                    OrderTotal = order.OrderTotal,
                     OrderDetailViewModels = tableorderdetail
                 });
             }
