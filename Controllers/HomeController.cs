@@ -58,6 +58,17 @@ namespace EggSplorer.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public IActionResult Registratie(Users user)
+        {
+            if (ModelState.IsValid)
+            {
+                // Add the admin to the database
+                _context.Users.Add(user);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("Index");
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
