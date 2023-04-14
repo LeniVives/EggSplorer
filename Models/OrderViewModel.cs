@@ -2,8 +2,11 @@
 {
     public class OrderViewModel
     {
-        public List<Products> Products { get; set; } = null!;
-        public OrderDetails OrderDetails { get; set; } = null!;
+        public int OrderId { get; set; }
+        public DateTime OrderPlaced { get; set; }
+        public string Username { get; set; }
+        public decimal OrderTotal { get; set; }
+        public List<OrderDetailViewModel> OrderDetailViewModels {get; set;}
     }
 
 }

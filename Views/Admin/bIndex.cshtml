@@ -34,19 +34,19 @@
             {
                 <tr>
                     <td class="col-lg-1 text-center align-middle">
-                        <input type="checkbox" name="selectedOrders" value="@Model.Orders[i].Id">
+                        <input type="checkbox" name="selectedOrders" value="@Model.Orders[i].OrderId">
                     </td>
                     <td class="col-lg-1 text-center align-middle">
-                        @Model.Orders[i].Id
+                        @Model.Orders[i].OrderId
                     </td>
                     <td class="col-lg-1 text-center align-middle">
                         @Model.Orders[i].OrderPlaced
                     </td>
                     <td class="col-lg-2 align-middle">
-                        @Model.Orders[i].User.FirstName @Model.Orders[i].User.LastName
+                        @Model.Orders[i].Username
                     </td>
                     <td class="col-lg-1 text-center align-middle">
-                        @Model.Orders[i].OrderTotal.ToString("0.00")
+                        € @Model.Orders[i].OrderTotal
                     </td>
                     <td class="col-lg-6">
                         <table>
@@ -62,22 +62,19 @@
                                 </th>
                             </tr>
 
-                            @foreach (var detail in Model.OrderDetails)
+                            @foreach (var detail in Model.Orders[i].OrderDetailViewModels)
                             {
-                                @if (detail.OrderId == Model.Orders[i].Id)
-                                {
-                                    <tr>
-                                        <td class="col-lg-1 text-center">
-                                            @detail.Quantity
-                                        </td>
-                                        <td class="col-lg-4">
-                                            @Model.ProductNames[detail.ProductId]
-                                        </td>
-                                        <td class="col-lg-1 text-center">
-                                            @Model.ProductPrices[detail.ProductId].ToString("0.00")
-                                        </td>
-                                    </tr>
-                                }
+                                <tr>
+                                    <td class="col-lg-1 text-center">
+                                        @detail.Quantity
+                                    </td>
+                                    <td class="col-lg-4">
+                                        @detail.Productname
+                                    </td>
+                                    <td class="col-lg-1 text-center">
+                                        € @detail.Price
+                                    </td>
+                                </tr>
                             }
                         </table>
                     </td>
@@ -102,23 +99,31 @@
             <th class="text-center align-middle">Aantal</th>
         </tr>
     </thead>
+    @{
+        decimal total = 0;
+    }
     <tbody>
-        @for (var i = 0; i < Model.Products.Count; i++)
+        @for (var i = 0; i < Model.Details.Count; i++)
         {
+            
             <tr>
                 <td class="align-middle">
-                    @Model.ProductNames[Model.Products[i].Id]
+                    @{
+                        total += Model.Details[i].Quantity * Model.Details[i].Price;
+                    }
+                    @Model.Details[i].Productname
                 </td>
-                @*                <td class="text-center align-middle">
-                    @Model.ProductQuantities[i]
-                </td>*@
+                <td class="text-center align-middle">
+                    
+                    @Model.Details[i].Quantity
+                </td>
             </tr>
         }
     </tbody>
     <tfoot>
         <tr>
             <td>
-                <b>TOTAALPRIJS: </b>@Model.TotalPrice.ToString("0.00")
+                <b>TOTAALPRIJS: </b>€ @total
             </td>
         </tr>
     </tfoot>
