@@ -3,7 +3,7 @@
     ViewData["Title"] = "gIndex";
 }
 
-<a href="@Url.Action("gCreate")" class="btn btn-primary">Create</a>
+<a href="@Url.Action("gCreate")" class="btn btn-success">Create</a>
 <br>
 
 <table class="table table--bottom-margin">
@@ -74,7 +74,7 @@
                 <td class="col-lg-1">
                     <form method="post" action="gEdit">
                         <input type="hidden" name="id" value="@Model[i].ID">
-                        <button type="submit" class="btn btn-success">Edit</button>
+                        <button type="submit" class="btn btn-primary">Edit</button>
                     </form>
                 </td>
                 <td class="col-lg-1">
