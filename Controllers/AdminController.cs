@@ -15,7 +15,7 @@ namespace EggSplorer.Controllers
             _context = context;
         }
 
-        public IActionResult index()
+        public IActionResult Index()
         {
             DateTime currentTime = DateTime.Now;
             string timeString = currentTime.ToString("hh:mm:ss tt");
@@ -28,14 +28,17 @@ namespace EggSplorer.Controllers
 
         public IActionResult bIndex()
         {
+            var orders = _context.Orders.ToList();
+            var orderdetails = _context.OrderDetails.ToList();
+
             var listorders = new List<OrderViewModel>();
 
-            foreach (var order in _context.Orders)
+            foreach (var order in orders)
             {
-                var user = _context.Users.Where(u => u.ID == order.UserID).First();
+                var user = _context.Users.First();
                 var tableorderdetail = new List<OrderDetailViewModel>();
 
-                foreach (var orderdetail in _context.OrderDetails)
+                foreach (var orderdetail in orderdetails)
                 {
                     if(orderdetail.OrderId == order.Id)
                     {
@@ -60,7 +63,7 @@ namespace EggSplorer.Controllers
 
             var listdetails = new List<OrderDetailViewModel>();
 
-            foreach(var orderdetail in _context.OrderDetails)
+            foreach(var orderdetail in orderdetails)
             {
                 var product = _context.Products.Where(p => p.Id == orderdetail.ProductId).First();
                 listdetails.Add(new OrderDetailViewModel {
