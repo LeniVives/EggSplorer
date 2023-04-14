@@ -1,5 +1,83 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model List<OrderViewModel>
+
+<form id="delete" method="post" action="bDeletecomplete"></form>
+
+<h5 class="text-center m-2 p-2">Ben je zeker dat je dit product wil verwijderen?</h5>
+<div>
+    <table class="table table--bottom-margin">
+        <thead>
+            <tr>
+                <th class="col-lg-1 text-center align-middle">
+                    ID
+                </th>
+                <th class="col-lg-1 text-center align-middle">
+                    Tijdstip
+                </th>
+                <th class="col-lg-2 align-middle">
+                    Klant
+                </th>
+                <th class="col-lg-1 text-center align-middle">
+                    Prijs bestelling
+                </th>
+                <th class="col-lg-6 text-center align-middle">
+                    Details bestelling
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @for (var i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <td class="col-lg-1 text-center align-middle">
+                        <input form="delete" type="hidden" name="selectedOrders" value="@Model[i].OrderId">
+                        @Model[i].OrderId
+                    </td>
+                    <td class="col-lg-1 text-center align-middle">
+                        @Model[i].OrderPlaced
+                    </td>
+                    <td class="col-lg-2 align-middle">
+                        @Model[i].Username
+                    </td>
+                    <td class="col-lg-1 text-center align-middle">
+                        € @Model[i].OrderTotal
+                    </td>
+                    <td class="col-lg-6">
+                        <table>
+                            <tr>
+                                <th class="col-lg-1 text-center">
+                                    Aantal
+                                </th>
+                                <th class="col-lg-4">
+                                    Product
+                                </th>
+                                <th class="col-lg-1 text-center">
+                                    Prijs/stuk
+                                </th>
+                            </tr>
+
+                            @foreach (var detail in Model[i].OrderDetailViewModels)
+                            {
+                                <tr>
+                                    <td class="col-lg-1 text-center">
+                                        @detail.Quantity
+                                    </td>
+                                    <td class="col-lg-4">
+                                        @detail.Productname
+                                    </td>
+                                    <td class="col-lg-1 text-center">
+                                        € @detail.Price
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    <input form="delete" type="submit" value="Verwijderen" class="btn btn-danger" />
+    <a href="@Url.Action("bIndex")" class="btn btn-secondary">Ga terug</a>
+</div>
