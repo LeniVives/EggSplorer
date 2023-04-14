@@ -46,44 +46,44 @@
     <tbody>
         @for (var i = 1; i < (Model.Count); i++)
         {
-                <tr>
-                    <td class="col-lg-2 text-center">
-                            @Model[i].ID
-                    </td>
-                    <td class="col-lg-2 text-center">
-                            @Model[i].FirstName
-                    </td>
-                    <td class="col-lg-4 text-center">
-                            @Model[i].LastName
-                    </td>
-                    <td class="col-lg-4 text-center">
-                            @Model[i].Email
-                    </td>
-                    <td class="col-lg-4 text-center">
-                            @Model[i].PhoneNumber
-                    </td>
-                    <td class="col-lg-1 text-center">
-                            @Model[i].Password
-                    </td>
-                    <td class="col-lg-1 text-center">
-                            @Model[i].IsAdmin
-                    </td>
-                    <td class="col-lg-1 text-center">
-                            @Model[i].IsApproved
-                    </td>
-                <td class="col-lg-1">
-                    <form method="post" action="gEdit">
-                        <input type="hidden" name="id" value="@Model[i].ID">
-                        <button type="submit" class="btn btn-success">Edit</button>
-                    </form>
-                </td>
-                <td class="col-lg-1">
-                    <form method="post" action="gDelete">
-                        <input type="hidden" name="id" value="@Model[i].ID">
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </td>
-                </tr>
+        <tr>
+            <td class="col-lg-2 text-center">
+                    @Model[i].ID
+            </td>
+            <td class="col-lg-2 text-center">
+                    @Model[i].FirstName
+            </td>
+            <td class="col-lg-4 text-center">
+                    @Model[i].LastName
+            </td>
+            <td class="col-lg-4 text-center">
+                    @Model[i].Email
+            </td>
+            <td class="col-lg-4 text-center">
+                    @Model[i].PhoneNumber
+            </td>
+            <td class="col-lg-1 text-center">
+                    @Model[i].Password
+            </td>
+            <td class="col-lg-1 text-center">
+                    @Model[i].IsAdmin
+            </td>
+            <td class="col-lg-1 text-center">
+                    @Model[i].IsApproved
+            </td>
+            <td class="col-lg-1">
+                <form method="post" action="gEdit">
+                    <input type="hidden" name="id" value="@Model[i].ID">
+                    <button type="submit" class="btn btn-success">Edit</button>
+                </form>
+            </td>
+            <td class="col-lg-1">
+                <form method="post" action="gDelete">
+                    <input type="hidden" name="id" value="@Model[i].ID">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

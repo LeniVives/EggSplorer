@@ -2,21 +2,21 @@
 
 <form id="delete" method="post" action="pDeletecomplete"></form>
 
-<h3>Are you sure you want to delete these products?</h3>
+<h5 class="text-center m-2 p-2">Ben je zeker dat je dit product wil verwijderen?</h5>
 <div>
     <table class="table table--bottom-margin">
         <thead>
             <tr>
-                <th class="col-lg-2 text-center">
+                <th class="col-lg-1 text-center align-middle">
                     ID
                 </th>
-                <th class="col-lg-2">
+                <th class="col-lg-3 align-middle">
                     Naam
                 </th>
-                <th class="col-lg-4">
+                <th class="col-lg-6 align-middle">
                     Beschrijving
                 </th>
-                <th class="col-lg-1">
+                <th class="col-lg-2 text-center align-middle">
                     Prijs
                 </th>
             </tr>
@@ -25,17 +25,17 @@
             @for (var i = 0; i < Model.Count; i++)
             {
                 <tr>
-                    <td class="col-lg-2">
+                    <td class="col-lg-1 text-center align-middle">
                         <input form="delete" type="hidden" name="deleteus" value="@Model[i].Id" />
                         @Model[i].Id
                     </td>
-                    <td class="col-lg-2">
+                    <td class="col-lg-3 align-middle">
                         @Model[i].Name
                     </td>
-                    <td class="col-lg-4">
+                    <td class="col-lg-6 align-middle">
                         @Model[i].Description
                     </td>
-                    <td class="col-lg-1">
+                    <td class="col-lg-2 text-center align-middle">
                         € @Model[i].ProductPrice
                     </td>
                 </tr>
@@ -44,6 +44,6 @@
     </table>
 </div>
 <div>
-    <input form="delete" type="submit" value="Delete" class="btn btn-danger" />
-    <a asp-action="pIndex">Back to List</a>
+    <input form="delete" type="submit" value="Verwijderen" class="btn btn-danger" />
+    <a href="@Url.Action("pIndex")" class="btn btn-secondary">Ga terug</a>
 </div>

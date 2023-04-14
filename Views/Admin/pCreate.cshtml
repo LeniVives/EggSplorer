@@ -12,14 +12,16 @@
     <link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
-    <h5 class="text-center m-2 p-2">Create a product in the database</h5>
+    <h5 class="text-center m-2 p-2">Nieuw product toevoegen</h5>
     <form asp-action="pCreate" method="post" class="m-2">
         <div asp-validation-summary="All"></div>
-        <div class="form-group"> <label asp-for="Name" class="form-label">Name:</label> <input asp-for="Name" class="form-control" />  </div>
-        <div class="form-group"> <label asp-for="Description" class="form-label">Description:</label> <input asp-for="Description" class="form-control" /> </div>
-        <div class="form-group"> <label asp-for="ProductPrice" class="form-label">ProductPrice:</label> <input asp-for="ProductPrice" class="form-control" /> </div>
- 
-        <button type="submit" class="btn btn-primary mt-3">Create</button>
+        <div class="form-group"> <label asp-for="Name" class="form-label">Productnaam:</label> <input asp-for="Name" class="form-control" />  </div>
+        <div class="form-group"> <label asp-for="Description" class="form-label">Beschrijving:</label> <input asp-for="Description" class="form-control" /> </div>
+        <div class="form-group"> <label asp-for="ProductPrice" class="form-label">Productprijs:</label> <input asp-for="ProductPrice" class="form-control" /> </div>
+        <div>
+            <button type="submit" class="btn btn-success mt-3">Maak aan</button>
+            <a href="@Url.Action("pIndex")" class="btn btn-secondary" style="margin-top:16px">Ga terug</a>
+        </div> 
     </form>
 </body>
 </html>

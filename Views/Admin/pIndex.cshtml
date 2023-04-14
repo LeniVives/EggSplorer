@@ -14,30 +14,31 @@
 <body>
     <form id="deleteform" method="post" action="pDelete"></form>
 
-    <a asp-action="pCreate">Create</a>
-    <br>
+    <a href="@Url.Action("pCreate")" class="btn btn-success">Maak aan</a>
+    <br />
+
     <table class="table table--bottom-margin">
         <thead>
             <tr>
                 <th class="col-lg-1 text-center align-middle">
                     Admin operatie
                 </th>
-                <th class="col-lg-2 text-center">
+                <th class="col-lg-1 text-center align-middle">
                     ID
                 </th>
-                <th class="col-lg-2 text-center">
+                <th class="col-lg-2 text-center align-middle">
                     Foto
                 </th>
-                <th class="col-lg-2">
+                <th class="col-lg-2 align-middle">
                     Naam
                 </th>
-                <th class="col-lg-4">
+                <th class="col-lg-4 align-middle">
                     Beschrijving
                 </th>
-                <th class="col-lg-1">
+                <th class="col-lg-1 text-center align-middle">
                     Prijs
                 </th>
-                <th>
+                <th class="col-lg-1 text-center align-middle">
                     Edit
                 </th>
                 
@@ -51,28 +52,28 @@
                     <td class="col-lg-1 text-center align-middle">
                         <input form="deleteform" type="checkbox" name="selectedProducts" value="@Model[i].Id">
                     </td>
-                    <td class="col-lg-2">
+                    <td class="col-lg-1 text-center align-middle">
                         @Model[i].Id
                     </td>
-                    <td class="col-lg-2 text-center">
+                    <td class="col-lg-2 text-center align-middle">
                         @{
                             var img = Model[i].Id.ToString() + ".jpg";
                         }
                         <img class="img-fluid" src="~/images/@img" style="height:100px; object-fit:cover">
                     </td>
-                    <td class="col-lg-2">
+                    <td class="col-lg-2 align-middle">
                         @Model[i].Name
                     </td>
-                    <td class="col-lg-4">
+                    <td class="col-lg-4 align-middle">
                         @Model[i].Description
                     </td>
-                    <td class="col-lg-1">
+                    <td class="col-lg-1 text-center align-middle">
                         € @Model[i].ProductPrice
                     </td>
-                    <td class="col-lg-1">
+                    <td class="col-lg-1 text-center align-middle">
                         <form method="post" action="pEdit">
                             <input type="hidden" name="id" value="@Model[i].Id">
-                            <button type="submit" class="btn btn-link">Edit</button>
+                            <button type="submit" class="btn btn-primary">Bewerken</button>
                         </form>
                     </td>
                 </tr>
@@ -80,7 +81,7 @@
         </tbody>
     </table>
     <div class="align-items-end">
-        <button form="deleteform" type="submit" class="btn btn-primary">Geselecteerde bestellingen verwijderen</button>
+        <button form="deleteform" type="submit" class="btn btn-danger">Verwijderen</button>
     </div>
 </body>
 </html>
