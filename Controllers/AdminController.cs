@@ -28,56 +28,105 @@ namespace EggSplorer.Controllers
 
         public IActionResult bIndex()
         {
-            var orderDetails = _context.OrderDetails.ToList();
-            var orders = _context.Orders.Include(o => o.User).ToList();
-            var products = _context.Products.ToList();
-            var productNames = products.ToDictionary(p => p.Id, p => p.Name);
-            var productPrices = products.ToDictionary(p => p.Id, p => p.ProductPrice);
-            var productQuantities = orderDetails.ToDictionary(p => p.Id, p => p.Quantity);
+            var listorders = new List<OrderViewModel>();
 
-            decimal totalPrice = 0;
-            int mybignum = 0;
+            foreach (var order in _context.Orders)
+            {
+                var user = _context.Users.Where(u => u.ID == order.UserID).First();
+                var tableorderdetail = new List<OrderDetailViewModel>();
+
+                foreach (var orderdetail in _context.OrderDetails)
+                {
+                    if(orderdetail.OrderId == order.Id)
+                    {
+                        var product = _context.Products.Where(p => p.Id == orderdetail.ProductId).First();
+                        tableorderdetail.Add(new OrderDetailViewModel
+                        {
+                            Quantity = orderdetail.Quantity,
+                            Productname = product.Name,
+                            Price = product.ProductPrice
+                        });
+                    }
+                }
+
+                listorders.Add(new OrderViewModel
+                {
+                    OrderId = order.Id,
+                    OrderPlaced = order.OrderPlaced,
+                    Username = user.FirstName + " " + user.LastName,
+                    OrderDetailViewModels = tableorderdetail
+                });
+            }
+
+            var listdetails = new List<OrderDetailViewModel>();
+
+            foreach(var orderdetail in _context.OrderDetails)
+            {
+                var product = _context.Products.Where(p => p.Id == orderdetail.ProductId).First();
+                listdetails.Add(new OrderDetailViewModel {
+                    Quantity = orderdetail.Quantity,
+                    Productname = product.Name,
+                    Price = product.ProductPrice
+                });
+            }
+            
+
+
+
+            //var orderDetails = _context.OrderDetails.ToList();
+            //var orders = _context.Orders.Include(o => o.User).ToList();
+            //var products = _context.Products.ToList();
+            //var productNames = products.ToDictionary(p => p.Id, p => p.Name);
+            //var productPrices = products.ToDictionary(p => p.Id, p => p.ProductPrice);
+            //var productQuantities = orderDetails.ToDictionary(p => p.Id, p => p.Quantity);
+
+            //decimal totalPrice = 0;
+            //int mybignum = 0;
 
             dynamic mymodel = new ExpandoObject();
-            mymodel.Products = products;
-            mymodel.ProductNames = productNames;
-            mymodel.ProductPrices = productPrices;
-            mymodel.ProductQuantities = productQuantities;
-            mymodel.Orders = orders;
-            mymodel.OrderDetails = orderDetails;
+           
+            mymodel.Orders = listorders;
+            mymodel.Details = listdetails;
 
-            foreach (var order in orders)
-            {
-                decimal orderPrice = 0;
-                foreach (var detail in orderDetails)
-                {
-                    if (detail.OrderId == order.Id)
-                    {
-                        decimal productPrice = detail.Quantity * detail.Product.ProductPrice;
-                        orderPrice += productPrice;
-                        totalPrice += productPrice;
-                    }
-                }
-            }
+            //mymodel.Products = products;
+            //mymodel.ProductNames = productNames;
+            //mymodel.ProductPrices = productPrices;
+            //mymodel.ProductQuantities = productQuantities;
+            //mymodel.Orders = orders;
+            //mymodel.OrderDetails = orderDetails;
 
-            foreach (var product in products)
-            {
-                int mynum = 0;
-                foreach (var detail in orderDetails)
-                {
-                    if (detail.ProductId == product.Id)
-                    {
-                        int myothernum = detail.Quantity;
-                        mynum += myothernum;
-                        mybignum += mynum;
-                    }
-                }
-            }
+            //foreach (var order in orders)
+            //{
+            //    decimal orderPrice = 0;
+            //    foreach (var detail in orderDetails)
+            //    {
+            //        if (detail.OrderId == order.Id)
+            //        {
+            //            decimal productPrice = detail.Quantity * detail.Product.ProductPrice;
+            //            orderPrice += productPrice;
+            //            totalPrice += productPrice;
+            //        }
+            //    }
+            //}
 
-            mymodel.TotalPrice = totalPrice;
-            mymodel.TotalQuantity = mybignum;
+            //foreach (var product in products)
+            //{
+            //    int mynum = 0;
+            //    foreach (var detail in orderDetails)
+            //    {
+            //        if (detail.ProductId == product.Id)
+            //        {
+            //            int myothernum = detail.Quantity;
+            //            mynum += myothernum;
+            //            mybignum += mynum;
+            //        }
+            //    }
+            //}
 
-            return View("bIndex", mymodel);
+            //mymodel.TotalPrice = totalPrice;
+            //mymodel.TotalQuantity = mybignum;
+
+            return View(mymodel);
         }
 
 
