@@ -26,6 +26,39 @@ namespace EggSplorer.Controllers
 
         //-------------------------------------------------------------------
 
+
+        public IActionResult bOverview()
+        {
+            var orders = _context.Orders.ToList();
+            var orderdetails = _context.OrderDetails.ToList();
+
+            var listdetails = new List<OrderDetailViewModel>();
+
+            foreach (var orderdetail in orderdetails)
+            {
+                var product = _context.Products.Where(p => p.Id == orderdetail.ProductId).First();
+                if (!listdetails.Where(d => d.Productname == product.Name).Any())
+                {
+                    listdetails.Add(new OrderDetailViewModel
+                    {
+                        Quantity = orderdetail.Quantity,
+                        Productname = product.Name,
+                        Price = product.ProductPrice
+                    });
+                }
+                else
+                {
+                    listdetails.Where(d => d.Productname == product.Name).First().Quantity += orderdetail.Quantity;
+                }
+            }
+
+            dynamic mymodel = new ExpandoObject();
+
+            mymodel.Details = listdetails;
+
+            return View(mymodel);
+        }
+
         public IActionResult bIndex()
         {
             var orders = _context.Orders.ToList();
